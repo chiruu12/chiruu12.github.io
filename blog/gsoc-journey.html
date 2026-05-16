@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>from GSoC contributor to mentor - Chirag Gupta</title>
+  <meta name="description" content="The one-PR-at-a-time lesson and other things I learned the hard way.">
+  <meta property="og:title" content="from GSoC contributor to mentor - Chirag Gupta">
+  <meta property="og:description" content="The one-PR-at-a-time lesson and other things I learned the hard way.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="nav">
+    <a href="../" class="site-name">chirag.gupta</a>
+        <a href="../">[home]</a>
+        <a href="../blog/">[blog]</a>
+        <a href="../achievements.html">[achievements]</a>
+        <a href="../resume.pdf">[resume]</a>
+    </nav>
+
+<header class="page-header">
+  <h1>from GSoC contributor to mentor</h1>
+  <p class="tagline">May 2026</p>
+</header>
+
+<hr>
+
+<article>
+  <p>In 2025, I applied to Google Summer of Code at Jenkins. The project: build an LLM-powered diagnostic system that analyzes CI build failures and tells you what went wrong and how to fix it. It sounded like the perfect intersection of my interests - agents, open source, and infrastructure that developers actually use every day.</p>
+
+  <p>I got in. And then I immediately made the classic newcomer mistake.</p>
+
+  <h2>// the four-PR disaster</h2>
+
+  <p>First week, I was fired up. I submitted four PRs to the same repository in five days. Different features, different files, no conflicts (I thought). I was trying to demonstrate velocity. Show the maintainers I was serious. Move fast, ship fast, impress everyone.</p>
+
+  <p>Then the maintainer reviewed the first PR and requested changes. Reasonable changes - restructure this, rename that, move this logic elsewhere. I made the changes. But now PR #2 had merge conflicts because it was based on the pre-review version of PR #1. PR #3 depended on a function I'd moved in the PR #1 revisions. PR #4 was fine on its own but the maintainer didn't have bandwidth to review four things simultaneously.</p>
+
+  <p>Two PRs got rewritten from scratch. One was closed because another contributor fixed the same issue while mine sat in review limbo. The whole thing was a mess of my own making.</p>
+
+  <p>The maintainer sent me a message I think about constantly: "One PR at a time. Make it excellent. Then move on."</p>
+
+  <h2>// what we actually built</h2>
+
+  <p>Once I slowed down, the work got better. We built a chain of specialized agents: a Router that classifies the type of build failure, Specialists that understand specific failure categories (dependency issues, test failures, configuration problems), and a Critic that validates the diagnosis before presenting it to the user.</p>
+
+  <p>We added a RAG layer backed by a vector store - historical build logs and their resolutions, so the system could reference similar past failures. Benchmarked it at 95% context relevance and 3.75/5.0 overall quality on our evaluation set.</p>
+
+  <p>The technical decisions I'm most proud of: a multi-backend LLM adapter so you're not locked to any single provider (Jenkins is used everywhere, you can't assume everyone has an OpenAI key), and a secure sanitization pipeline that strips secrets from logs before they hit the LLM. Jenkins build logs are full of credentials, API keys, and internal URLs. Sending those to an external API without sanitization would be a security disaster.</p>
+
+  <p>We also built dual-layer conversation memory - short-term context within a debugging session and long-term knowledge about recurring failures in a specific project. The system gets better at diagnosing your builds over time.</p>
+
+  <h2>// the other side of the table</h2>
+
+  <p>Coming back as a mentor in 2026 is a different experience entirely. You're reviewing code instead of writing it. You're explaining "why" instead of asking "how." When a contributor submits a PR that's trying to do three things at once, you recognize it immediately because you were that person a year ago.</p>
+
+  <p>The hardest part of mentoring isn't the technical review. It's calibrating feedback. Too harsh and people disappear. Too gentle and the code quality drifts. You have to be direct about what needs to change while making it clear that needing changes is normal, not a failure.</p>
+
+  <p>I've started front-loading context in my reviews. Instead of just "this needs to be restructured," I explain what the current structure will cause problems with down the line. People take feedback better when they understand the reasoning, not just the verdict.</p>
+
+  <h2>// the meta-lesson</h2>
+
+  <p>The biggest thing GSoC taught me: small complete increments, each one deployable. Not "move fast and break things." Move deliberately and keep things working. Every PR should leave the codebase in a better state than it found it, even if the feature isn't done yet.</p>
+
+  <p>This principle is why the OSS contribution skills I built later enforce exactly this pattern. The workflow is: find one issue, prep thoroughly, submit one excellent PR, handle review feedback, then move to the next thing. It's the "one PR at a time" lesson, systematized.</p>
+
+  <p>The irony of going from "person who submits 4 broken PRs in a week" to "person who mentors others on contribution practices" is not lost on me. But maybe that's exactly why it works. The lessons you learn by screwing up stick harder than the ones you read in a contributing guide.</p>
+</article>
+
+<hr>
+
+<footer>
+  <p><a href="../blog/">&larr; back to blog</a></p>
+</footer>
+
+</body>
+</html>

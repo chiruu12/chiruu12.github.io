@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mutter - Chirag Gupta</title>
+  <meta name="description" content="Mutter: local-first voice assistant. You mutter things, it captures them.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- "hey siri" but for people who don't trust siri -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="../blog/">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>Mutter <span class="badge badge-shipped">[SHIPPED]</span></h1>
+  <p class="tagline">Local-first voice assistant. You mutter things, it captures them.</p>
+  <p><a href="https://github.com/chiruu12/Mutter">[github]</a></p>
+</header>
+
+<hr>
+
+<h2>// what it does</h2>
+<p>Mutter sits in your macOS menu bar. Press Cmd+Shift+M, say something, and it figures out what to do with it. No wake words, no cloud. MLX Whisper handles speech-to-text locally, an LLM in LM Studio routes your speech into tasks, notes, or queries against your own knowledge base.</p>
+
+<h2>// why I built this</h2>
+<p>I kept losing thoughts mid-coding-session. The friction of opening a todo app was enough to lose the idea. Mutter removes that: hotkey, talk, done.</p>
+<p>Part of a bigger picture: <a href="hive.html">Hive</a> for orchestration, <a href="unplug.html">Unplug</a> for defense, Mutter for voice. Each one explores a different facet of making AI work locally.</p>
+
+<h2>// stack</h2>
+<p>Python rumps (menu bar), MLX Whisper (STT), LM Studio (LLM), ChromaDB (vectors), SQLite (tasks), FastAPI (server). CLI: <code>mutter tasks</code>, <code>mutter notes</code>, <code>mutter ask "..."</code></p>
+
+<h2>// what's next</h2>
+<p>WhatsApp/Telegram delivery, continuous listening, calendar integration, <a href="hive.html">Hive</a> agent integration for autonomous follow-ups, Linux/Windows support.</p>
+
+<footer>
+  <p><a href="../">&lt;- back home</a></p>
+</footer>
+
+</body>
+</html>

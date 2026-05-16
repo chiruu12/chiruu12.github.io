@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>what shipping DevCard taught me - Chirag Gupta</title>
+  <meta name="description" content="Lessons from a PyPI launch that got 50 LinkedIn likes and zero installs.">
+  <meta property="og:title" content="what shipping DevCard taught me - Chirag Gupta">
+  <meta property="og:description" content="Lessons from a PyPI launch that got 50 LinkedIn likes and zero installs.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="nav">
+    <a href="../" class="site-name">chirag.gupta</a>
+        <a href="../">[home]</a>
+        <a href="../blog/">[blog]</a>
+        <a href="../achievements.html">[achievements]</a>
+        <a href="../resume.pdf">[resume]</a>
+    </nav>
+
+<header class="page-header">
+  <h1>what shipping DevCard taught me</h1>
+  <p class="tagline">May 2026</p>
+</header>
+
+<hr>
+
+<article>
+  <p>I shipped DevCard in early May. It's a CLI tool that generates developer identity cards from your GitHub profile. You run it, it pulls your repos, analyzes your contribution patterns across 14 different extractors, and generates a card with one of 5 visual themes. It scores you on two axes: human visibility (stars, followers, popular repos) and agent readiness (how well your code works with AI tooling). Shipped it on PyPI with an MCP server so AI agents can query developer profiles programmatically.</p>
+
+  <p>I was proud of the engineering. The dual-scoring model felt novel. The architecture was clean. I wrote a LinkedIn post announcing the launch.</p>
+
+  <h2>// the vanity metrics hit</h2>
+
+  <p>The post got around 50 likes. For my network size, that's solid. People left comments. "This is cool." "Interesting concept." "Love the idea." I felt good for about a day.</p>
+
+  <p>Then I checked the PyPI download counter.</p>
+
+  <p>Nearly zero.</p>
+
+  <p>Fifty people liked a post about a tool. Approximately none of them installed it. The gap between "this is interesting" and "I will open my terminal and type pip install" is apparently infinite.</p>
+
+  <h2>// lesson 1: a post is not a distribution strategy</h2>
+
+  <p>A thought leadership post on LinkedIn is engagement, not distribution. People scroll, they react, they move on. The cognitive jump from "I read a post about a cool tool" to "I will stop what I'm doing, open a terminal, install Python if I don't have it, run pip install, figure out the CLI flags, and generate a card" is enormous. I was asking for 5 minutes of setup effort from people who gave me 3 seconds of attention.</p>
+
+  <p>The post was optimized for likes, not for conversions. And I got exactly what I optimized for.</p>
+
+  <h2>// lesson 2: demos beat descriptions</h2>
+
+  <p>What I should have built first: a web app. Paste your GitHub username, get a card in 10 seconds. Zero friction. No install. No terminal. No pip. Just a URL you can share.</p>
+
+  <p>A CLI tool requires the user to already want the thing enough to go through setup friction. A web app creates want by showing you the result before you invest anything. The demo IS the distribution. Every person who generates a card shares it, and that share is the marketing.</p>
+
+  <p>I built the hard version first (full CLI with 14 extractors and 5 themes) when I should have built the easy version first (web form, one theme, instant result).</p>
+
+  <h2>// lesson 3: the scoring model works</h2>
+
+  <p>The one genuinely interesting finding: Andrej Karpathy, one of the most visible people in AI, scored lower on "agent readiness" than many random developers with 50 followers. His repos are famous but they're not structured for programmatic consumption. No MCP servers, limited structured metadata, mostly educational code.</p>
+
+  <p>Meanwhile, developers nobody's heard of who publish well-documented APIs with structured outputs score high on agent readiness. The two axes are genuinely orthogonal. The dual-scoring model measures something real, and that's the actual insight worth building around.</p>
+
+  <h2>// what's next</h2>
+
+  <p>The plan now is a GitHub Action. You add it to your repo, it auto-renders a DevCard SVG into your README on every push. No install friction. Organic daily impressions from everyone who visits your GitHub profile. The card updates itself as your contributions change.</p>
+
+  <p>This inverts the distribution problem. Instead of asking people to go somewhere and do something, the card lives where developers already are. Every README view is an impression. Every fork carries the card with it.</p>
+
+  <p>The engineering was the easy part. Distribution is the hard part. Everyone says this. Nobody believes it until they ship something and watch the download counter stay at zero.</p>
+</article>
+
+<hr>
+
+<footer>
+  <p><a href="../blog/">&larr; back to blog</a></p>
+</footer>
+
+</body>
+</html>

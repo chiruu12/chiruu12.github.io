@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSoC - Chirag Gupta</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- pro tip: submit one PR at a time. I learned this the hard way. -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="../blog/">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>GSoC '25 <span class="badge badge-shipped">[SHIPPED]</span></h1>
+  <p class="tagline">Multi-agent diagnostic system for Jenkins build failures</p>
+  <p><a href="https://github.com/jenkinsci/domain-llm">[github]</a></p>
+</header>
+
+<hr>
+
+<h2>// what it does</h2>
+<p>When a Jenkins build fails, this system analyzes the logs and tells you what went wrong. Chain of specialized agents: router classifies the failure, specialist analyzes specifics, critic validates the diagnosis. RAG layer backed by vector store gives agents context from Jenkins docs and known issues.</p>
+
+<h2>// why I built this</h2>
+<p>GSoC 2025 project at Jenkins. Build failures are one of those problems where the logs contain the answer, but finding it takes experience. This system encodes that experience into an agent pipeline.</p>
+
+<h2>// results</h2>
+<p>Benchmarked on 20 curated questions: 95% context relevance, 3.75/5.0 overall. Multi-backend LLM adapter (OpenAI, Gemini, Claude) with mode-switching. Secure sanitization pipeline for credentials in logs.</p>
+
+<h2>// journey</h2>
+<p>GSoC '25 contributor, now GSoC '26 mentor at Jenkins. The biggest lesson: one PR at a time, make it excellent, then move on. <a href="../blog/gsoc-journey.html">Full story here.</a></p>
+
+<footer>
+  <p><a href="../">&lt;- back home</a></p>
+</footer>
+
+</body>
+</html>
