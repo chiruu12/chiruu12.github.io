@@ -1,11 +1,11 @@
 # Chirag Gupta
 
-chirag.gupta.290403@gmail.com | +91 7827721664 | Delhi, India
+chirag.gupta.290403@gmail.com | +91 7827721664
 https://linkedin.com/in/chiruu12 | https://github.com/chiruu12 | https://chiruu12.github.io
 
 ## Profile
 
-AI engineer building multi-agent systems and agent infrastructure. GSoC '25 contributor and '26 mentor at Jenkins. Dual degree at BITS Pilani (Mathematics + Electronics, 2026).
+AI engineer building multi-agent systems and agent infrastructure. GSoC '25 contributor and '26 mentor at Jenkins.
 
 ## Professional Experience
 
@@ -32,7 +32,7 @@ https://github.com/jenkinsci/domain-llm
 - Added vector-store RAG layer, benchmarked on 20 curated questions: 95% context relevance, 3.75/5.0 overall score
 - Integrated multi-backend LLM adapter (OpenAI, Gemini, Claude) with mode-switching for analysis vs recommendation
 
-### AI Engineer (Contract), Reasonify Technology Pvt Ltd
+### AI Engineer, Reasonify Technology Pvt Ltd
 
 - Built multi-agent LLM pipelines for adaptive learning content and automated study-plan generation
 - Built automated Manim video generation pipeline (CLI + prompt standardization + component library), cutting production time from 5h to 20min
