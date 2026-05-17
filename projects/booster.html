@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booster - Chirag Gupta</title>
+  <meta name="description" content="Building multi-agent infrastructure for an AI collaboration platform at GoManzanas.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- this page describes work done at a startup. the repos are private. trust but verify the OSS ones instead. -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="../blog/">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>Booster</h1>
+  <p class="tagline">AI collaboration platform at GoManzanas (US Startup)</p>
+</header>
+
+<hr>
+
+<h2>// what it is</h2>
+<p>Booster is a collaborative ideation platform where users contribute, refine, and evolve ideas through AI-assisted conversations called "Riffs." I've been building core infrastructure here since January 2026. The stack is FastAPI + SQLModel + PostgreSQL on the backend, React + TypeScript on the frontend.</p>
+
+<h2>// what I built</h2>
+
+<p><strong>Multi-agent group chat.</strong> Agents collaborate in real-time with turn-based orchestration. Each agent has a persona, tools, and memory. When you @mention an agent, their full conversation history gets injected as context. The system handles auto-respawn on container failures and LLM-based history compaction so context doesn't explode.</p>
+
+<p><strong>Containerized code execution.</strong> Agents can run code in isolated Docker environments. I built the CDE (Claude Development Environment) from scratch: container lifecycle, file management via MinIO, session persistence, and a Typer CLI for management. Agents get their own persistent workspace with file upload, trash, and audit logging.</p>
+
+<p><strong>Claude CLI wrapper service.</strong> A FastAPI service that wraps the Claude Code CLI to provide agent personas for the web UI. I built the session management layer: idle reaper with TOCTOU guards, FIFO session queue for scaling beyond semaphore limits, and WebSocket event relay. 60 commits across session lifecycle, concurrency control, and persona extensibility.</p>
+
+<p><strong>Skills system v2.</strong> Agents can load markdown-based skills that modify their behavior. Dual-path resolver (content takes precedence over instructions), skill builder agent, upload/preview API. Think of it as hot-loadable personality modules for agents.</p>
+
+<p><strong>Model tiering and benchmarking.</strong> Not all tasks need the same model. I built a tier registry that routes agents to different LLM providers based on task complexity. On top of that, an agent simulator for A/B benchmarking across 7+ models, measuring cost, honesty, and consistency.</p>
+
+<p><strong>Custom MCP server.</strong> Built an MCP server that gives agents access to Booster's data: user profiles, projects, ideas, conversations, and structured data files (CSV/XLSX/JSON). Two-layer access model with header secrets and wrapper allowlists.</p>
+
+<p><strong>Webhook triggers and notifications.</strong> Agents can be triggered by external events via webhooks with dynamic cron registration. I also built the email notification system: per-user preferences, daily digest with AI-generated summaries, and MailHog integration for testing.</p>
+
+<h2>// scope</h2>
+<p>387 commits on the backend, 108 on the code container, 60 on the Claude wrapper, 8 on the MCP server. The repos are private (startup codebase), so I can't link to them. The work spans backend architecture, agent infrastructure, real-time systems, and developer tooling.</p>
+
+<footer>
+  <p><a href="../">&lt;- back home</a></p>
+</footer>
+
+</body>
+</html>
