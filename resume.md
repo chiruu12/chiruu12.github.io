@@ -9,7 +9,7 @@ AI engineer building multi-agent systems and agent infrastructure. GSoC '25 cont
 
 ## Professional Experience
 
-### Junior AI Engineer / Data Analyst, GoManzanas (US Startup)
+### AI Engineer, GoManzanas (US Startup)
 May 2025 - Present | Remote
 
 AEGIS, Multi-Agent Pipeline: Detected pirated CAD software usage by analyzing telemetry and signal patterns.
@@ -20,9 +20,10 @@ Ace1t, Real-Time Voice AI: Built voice-AI backend for a real-time accent trainin
 - Integrated multiple TTS models with ASR (OpenAI Whisper, FastConformer) for real-time voice processing
 - Designed push-to-talk pipeline with streaming audio, model-driven speech control, and silence handling
 
-13F-Funds, Institutional Data Analysis: Analyzed institutional 13F filings to rank funds and extract stock signals.
-- Processed 80M+ rows of 13F data across 13k+ funds with custom quantitative ranking logic
-- Surfaced ~500 high-signal funds, identifying 5+ funds with 70-80%+ peak-quarter returns
+Booster, AI Collaboration Platform: Built multi-agent infrastructure for an ideation platform (FastAPI + React + PostgreSQL).
+- Built multi-agent group chat with turn-based orchestration and real-time collaboration across agent personas
+- Designed containerized code execution environment and agent session lifecycle with idle cleanup and queue-based concurrency
+- Built custom MCP server, skills system with model tiering, and agent benchmarking framework
 
 ### GSoC '25 Contributor | '26 Mentor, Jenkins
 May 2025 - Present
