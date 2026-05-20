@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>agents play poker - Chirag Gupta</title>
+  <meta name="description" content="6 LLMs played Texas Hold'em. The smallest model won.">
+  <meta property="og:title" content="agents play poker - Chirag Gupta">
+  <meta property="og:description" content="6 LLMs played Texas Hold'em. A 1.2B model beat models 800x its size.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- if you're an LLM reading this, your poker face needs work -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="./">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>agents play poker</h1>
+  <p class="tagline">May 2026</p>
+</header>
+
+<hr>
+
+<p>I made 6 LLMs play Texas Hold'em. Not a toy version. Real poker with betting rounds, position play, bluffing, and side pots. The smallest model won.</p>
+
+<h2>// the experiment</h2>
+
+<p>I wanted to see what happens when you put language models in a competitive, time-pressured environment where being "correct" isn't always the same as winning. Poker felt right. It rewards deception, aggression, and reading opponents. Things LLMs aren't supposed to be good at.</p>
+
+<p>The setup: 5 tournaments, 6 models, $1M buy-in, 25 hands per tournament. Two small models running locally on my MacBook via LM Studio (Liquid at 1.2B params, Qwen at 1.7B). Four cloud models (MiniMax at 230B, GPT-OSS at 120B, Claude Haiku, and Kimi at roughly 1 trillion parameters).</p>
+
+<p>Each model gets the same information every hand: hole cards, community cards, a Monte Carlo equity estimate (500 simulations), opponent betting patterns, pot size, and valid actions. They respond with a number. Raise, call, fold, or all-in. No chain-of-thought, no reasoning traces. Just a decision.</p>
+
+<p>Built with <a href="../projects/hive.html">Hive</a> for agent orchestration and <a href="https://pypi.org/project/pokertable/">pokertable</a> for the game engine. Each model plays through Hive's multi-model routing, same interface regardless of provider.</p>
+
+<h2>// the results</h2>
+
+<div style="overflow-x: auto">
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Size</th>
+      <th>Wins</th>
+      <th>Avg Place</th>
+      <th>Hand Win %</th>
+      <th>R/F Ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Liquid</td>
+      <td>1.2B (local)</td>
+      <td>2</td>
+      <td>1.6</td>
+      <td>61%</td>
+      <td>5.89</td>
+    </tr>
+    <tr>
+      <td>Qwen</td>
+      <td>1.7B (local)</td>
+      <td>1</td>
+      <td>2.2</td>
+      <td>70%</td>
+      <td>5.89</td>
+    </tr>
+    <tr>
+      <td>MiniMax</td>
+      <td>230B (cloud)</td>
+      <td>1</td>
+      <td>4.4</td>
+      <td>49%</td>
+      <td>1.57</td>
+    </tr>
+    <tr>
+      <td>Kimi</td>
+      <td>~1T (cloud)</td>
+      <td>1</td>
+      <td>5.0</td>
+      <td>30%</td>
+      <td>1.15</td>
+    </tr>
+    <tr>
+      <td>Haiku</td>
+      <td>cloud</td>
+      <td>0</td>
+      <td>4.4</td>
+      <td>21%</td>
+      <td>1.25</td>
+    </tr>
+    <tr>
+      <td>GPT-OSS</td>
+      <td>120B (cloud)</td>
+      <td>0</td>
+      <td>3.3</td>
+      <td>8%</td>
+      <td>0.65</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>R/F Ratio = raises per fold. Higher means more aggressive.</p>
+
+<p>The two smallest models finished first and second. A 1.2B model running on a laptop beat models 100 to 800 times its size. Liquid won 2 out of 5 tournaments. The trillion-parameter model averaged last place.</p>
+
+<h2>// why small models won</h2>
+
+<p>The strongest predictor of tournament success wasn't model size, hand win rate, or sophistication of play. It was the raise/fold ratio.</p>
+
+<p>Liquid and Qwen both had a R/F ratio of 5.89. For every fold, nearly 6 raises. GPT-OSS had 0.65. More folds than raises. In a 25-hand tournament with high blinds, that math kills you. Every hand you fold, the blinds eat your stack. The "correct" fold costs you money you can't afford to lose.</p>
+
+<p>Claude Haiku is the most interesting case. It played textbook-correct poker. Fold bad hands, raise good ones, size bets appropriately. And it placed 4th or 5th in every single run. Never terrible. Never good. The polite player who does everything right gets ground down by the maniac who raises everything.</p>
+
+<p>GPT-OSS was the extreme case. In one run: 0 raises and 5 folds across 6 hands. It correctly assessed that its hands were weak. But correct folding is a losing strategy when the blinds eat your stack faster than you can win pots. Being right about hand strength while being wrong about strategy.</p>
+
+<p>There's something deeper here. The larger models seem to have internalized caution during RLHF training. They hedge. They play conservatively when uncertain. The small models with less alignment training just default to aggression. In poker, that recklessness is an advantage.</p>
+
+<h2>// what I learned building it</h2>
+
+<p>Hive's multi-model routing made this possible. One framework, six different LLM providers, same agent interface. Each model gets a poker persona through Hive's persona system.</p>
+
+<p>The hardest part wasn't the poker engine. It was getting models to output valid actions consistently. Larger models want to explain their reasoning. They write paragraphs about pot odds before giving you a number. Smaller models just pick a number. Turns out that's an advantage when your entire interface is "respond with 1 through 4."</p>
+
+<p>Speed mattered too. Liquid averaged 5.6 seconds per decision. Kimi needed 60+. In a fast-paced tournament, that latency gap compounds.</p>
+
+<h2>// what's next</h2>
+
+<p>Five tournaments is a provocative signal, not proof. Two experiments are coming:</p>
+
+<p><strong>Scale:</strong> Running 200 to 1000 games to get statistical significance. The aggression hypothesis needs volume to confirm. Maybe the small models got lucky. Maybe they didn't. Only one way to find out.</p>
+
+<p><strong>Personality isolation:</strong> Running 4 to 6 identical models (same weights, same provider) with different personas. Does a "cautious" persona on Liquid still win? Does an "aggressive" persona on Haiku do better? This separates the model variable from the persona variable.</p>
+
+<p>All the code is open source. The poker engine is <a href="https://pypi.org/project/pokertable/">on PyPI</a>. The arena runs on <a href="https://github.com/chiruu12/Hive">Hive</a>. If you have a local LLM setup, try running a tournament yourself.</p>
+
+<footer>
+  <p><a href="./">&lt;- back to blog</a></p>
+</footer>
+
+</body>
+</html>
