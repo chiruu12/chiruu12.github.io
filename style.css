@@ -185,6 +185,13 @@ th {
   border-bottom: 2px solid var(--border-strong);
 }
 
+caption {
+  text-align: left;
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
 tr:last-child td {
   border-bottom: none;
 }
@@ -256,6 +263,10 @@ footer p { margin-bottom: 0.3rem; }
 
   table {
     font-size: 0.75rem;
+  }
+
+  th {
+    font-size: 0.9rem;
   }
 
   th, td {
