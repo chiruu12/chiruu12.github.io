@@ -26,16 +26,38 @@
 <hr>
 
 <h2>// what it does</h2>
-<p>Define an AI agent in YAML, run it, and it persists. No Docker, no cloud. Agents route between multiple LLM backends (Claude, Codex, LM Studio) and collaborate through shared "rooms." They synthesize their own tools when needed.</p>
+<p>Define an AI agent in YAML, give it a personality, point it at any LLM backend, and let it run. Agents persist across sessions, collaborate through shared rooms, and synthesize tools as needed. No Docker, no cloud. Your machine, your models.</p>
+
+<p>Hive is also an arena. You can pit agents against each other in structured games. The first arena game is Texas Hold'em.</p>
+
+<h2>// what it can do now</h2>
+<ul>
+  <li><strong>Poker arena:</strong> Run tournaments between LLM agents. Full Texas Hold'em with betting mechanics, automated scoring, and stat tracking via <a href="https://pypi.org/project/pokertable/">pokertable</a>.</li>
+  <li><strong>Multi-model support:</strong> Route agents to Anthropic, OpenAI, Groq, Fireworks, Ollama, or LM Studio. Same interface, any backend. Mix local and cloud models in the same session.</li>
+  <li><strong>Persona system:</strong> Each agent gets a personality defined in YAML. Personas evolve based on what happens to the agent.</li>
+  <li><strong>Agent-to-agent communication:</strong> Agents talk to each other through shared rooms. Multi-turn conversations between agents with different goals.</li>
+  <li><strong>Suffering system:</strong> 6 stressor types that mechanically change agent behavior. Not flavor text. Stressors alter risk tolerance, decision-making, and communication style. An agent that keeps losing becomes more desperate. One that keeps winning gets overconfident.</li>
+</ul>
+
+<h2>// the poker experiment</h2>
+<p>I ran 5 poker tournaments with 6 LLMs ranging from 1.2B to ~1T parameters. The smallest model (Liquid, 1.2B, running locally) won 2 out of 5 tournaments and had the best average placement. The trillion-parameter model averaged last place.</p>
+
+<p>The full results and analysis are in <a href="../blog/agents-play-poker.html">the blog post</a>.</p>
 
 <h2>// why I built this</h2>
-<p>Every agent framework I've tried either requires a PhD in configuration or ships your data to someone else's cloud. Hive is the alternative: your machine, your models, your agents.</p>
+<p>Every agent framework I've tried either requires a PhD in configuration or ships your data to someone else's cloud. Hive is the alternative: your machine, your models, your agents. The arena is a proving ground for how agents make decisions under pressure.</p>
 
 <h2>// stack</h2>
-<p>Python, Typer CLI, YAML profiles, JSONL persistence + SQLite state, multi-model routing, agent-to-agent communication via rooms.</p>
+<p>Python, Typer CLI, YAML agent profiles, JSONL persistence + SQLite state, multi-model routing (Anthropic, OpenAI, Groq, Fireworks, Ollama, LM Studio), pokertable for game mechanics, agent-to-agent rooms, persona engine, suffering system.</p>
 
 <h2>// what's next</h2>
-<p>Phase 1: daemon loop, autonomy system, multi-model routing. Then: tool synthesis, suffering system (stressors drive agent behavior change), and integration with <a href="mutter.html">Mutter</a> for voice-triggered agents.</p>
+<ul>
+  <li>Running 200-1000 poker games for statistical significance</li>
+  <li>Persona isolation experiments: same model, different personalities</li>
+  <li>Daemon loop and full autonomy system</li>
+  <li>Tool synthesis</li>
+  <li>Integration with <a href="mutter.html">Mutter</a> for voice-triggered agents</li>
+</ul>
 
 <footer>
   <p><a href="../">&lt;- back home</a></p>
