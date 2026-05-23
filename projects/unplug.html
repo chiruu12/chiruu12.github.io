@@ -22,26 +22,26 @@
   <p class="tagline">Runtime security for AI agents</p>
   <p>
     <a href="https://unplug-ai.org">[site]</a>
-    <a href="https://github.com/chiruu12/Unplug">[github]</a>
+    <a href="https://github.com/UnplugAI">[github]</a>
   </p>
 </header>
 
 <hr>
 
 <h2>// what it does</h2>
-<p>Defense layer for LLM agents. 3-stage pipeline (regex, ML classifier, LLM judge) that catches prompt injection, data leakage, destructive actions, and jailbreaks. Span-level redaction, not binary blocking. Ships as a Python SDK with a hosted API and MCP server coming next.</p>
-
-<h2>// why I built this</h2>
-<p>Every agent framework I tested (9 of them: LangChain, CrewAI, OpenAI Agents SDK, etc.) has zero built-in security. Agents can now execute code, query databases, and move money, but nothing sits between what an attacker tells the agent and what the agent does. Prompt injection has been OWASP's top LLM vulnerability for three years running.</p>
+<p>Defense layer for AI agents. 3-stage detection pipeline (regex engine, ML classifier, LLM judge) that catches prompt injection, data leakage, destructive actions, and jailbreaks. Span-level redaction strips the malicious parts while preserving legitimate content. Ships as a Python SDK, hosted API, and MCP server.</p>
 
 <h2>// what makes it different</h2>
-<p>Taint tracking. Every piece of text carries metadata about where it came from (user input vs retrieved document vs tool output). This catches indirect injection, where a malicious instruction hidden in a document the agent reads drives a destructive tool call. Most scanners treat text in isolation. Unplug tracks the full execution graph.</p>
+<p>Taint tracking. Every piece of text carries metadata about where it came from: user input, retrieved document, tool output. This catches indirect injection, where a malicious instruction hidden in a document drives a destructive tool call. Most scanners treat text in isolation. Unplug tracks the full execution graph.</p>
+
+<h2>// models</h2>
+<p>Training our own model family on a synthetic + curated high-quality dataset. Unplug Tiny ships first as a fully open-source classifier. Small and larger variants follow. All models and the training dataset go public.</p>
 
 <h2>// stack</h2>
-<p>Python SDK (<code>pip install unplug</code>). 245+ regex patterns across 15 languages, 12-stage text normalizer that beats evasion techniques (leetspeak, homoglyphs, base64, zero-width characters). ONNX classifier on CPU, no GPU needed. Planning to train a proprietary model on a synthetic dataset as threat data grows.</p>
+<p>Python SDK. 12-stage text normalizer that defeats evasion techniques (leetspeak, homoglyphs, base64, zero-width characters, reversed text, cross-language attacks). ONNX inference on CPU, no GPU needed. Everything runs under <a href="https://github.com/UnplugAI">UnplugAI</a>.</p>
 
 <h2>// what's next</h2>
-<p>Loading the ONNX classifier, publishing to PyPI, benchmarks against public datasets. Then framework integrations starting with Agno, and a hosted API for teams that don't want to self-host.</p>
+<p>Shipping Unplug Tiny on HuggingFace, publishing the SDK to PyPI, launching the hosted API as a service. Framework integrations starting with Agno.</p>
 
 <footer>
   <p><a href="../">&lt;- back home</a></p>

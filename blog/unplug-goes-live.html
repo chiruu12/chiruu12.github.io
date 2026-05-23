@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>unplug goes live - Chirag Gupta</title>
-  <meta name="description" content="Unplug got a domain, a site, and a plan. Here's where things stand.">
+  <meta name="description" content="Unplug has a home. Here's what we're shipping.">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -24,36 +24,29 @@
 
 <hr>
 
-<p><a href="https://unplug-ai.org">unplug-ai.org</a> is live. Domain acquired, emails routed, site deployed on Cloudflare Pages. Unplug now has a home on the internet that isn't just a GitHub README.</p>
+<p><a href="https://unplug-ai.org">unplug-ai.org</a> is live. Everything lives under the <a href="https://github.com/UnplugAI">UnplugAI</a> org now: SDK, site, models, datasets.</p>
 
-<h2>// where the product stands</h2>
+<h2>// what's shipping</h2>
 
-<p>The SDK has about 3,100 lines of source code and 2,600 lines of tests. Five scanners (injection, destructive, leakage, harmful, financial), a 12-stage text normalizer that handles evasion techniques most tools ignore, and a taint tracking system that traces where every piece of text came from.</p>
+<p>The SDK has a 3-stage detection pipeline, taint tracking across execution graphs, and a 12-stage text normalizer that handles evasion techniques most tools skip. We're training Unplug Tiny, our own lightweight classifier, on a synthetic + curated high-quality dataset that we're actively scaling. Tiny ships first, then Small, then larger variants.</p>
 
-<p>The architecture is solid. The problem is that nobody can use it yet. Not on PyPI, no CLI, no ML classifier loaded. Lots of well-written code sitting in a repo with zero stars.</p>
+<p>The plan is to release Unplug Tiny fully open source alongside the SDK. The models and the dataset both go public.</p>
 
-<h2>// what's coming</h2>
-
-<p>The v0.2.0 plan is locked. Three weeks of work:</p>
+<h2>// what's next</h2>
 
 <ul>
-  <li>Fix 15 security bugs found during a thorough code review (a security product with known vulnerabilities is a bad look)</li>
-  <li>Load an ONNX classifier (ProtectAI DeBERTa) so it's not just regex</li>
-  <li>Build a CLI so you can run <code>unplug scan "text"</code> from a terminal</li>
-  <li>Publish to PyPI so anyone can <code>pip install unplug</code></li>
-  <li>Write an Agno framework integration and submit a PR to their repo</li>
-  <li>Run benchmarks against public datasets and publish the numbers</li>
+  <li>Ship Unplug Tiny as an open-source model on HuggingFace</li>
+  <li>Publish the SDK to PyPI with the classifier baked in</li>
+  <li>Launch the hosted API as a service for teams that don't want to self-host</li>
+  <li>Framework integrations, starting with Agno</li>
+  <li>Scale the dataset and train larger model variants</li>
 </ul>
 
-<p>After that: synthetic dataset creation for training a custom model, and releasing Unplug Tiny as a lightweight open-source classifier.</p>
+<h2>// why this matters</h2>
 
-<h2>// the bet</h2>
+<p>AI agents now execute code, query databases, and move money. None of the major frameworks have built-in security. Four companies in this space got acquired for a combined $1.3 billion in the last year. The independent open-source position is wide open.</p>
 
-<p>AI agents are getting tool access. They can query databases, execute code, move money. Zero out of nine major agent frameworks have built-in security. Four standalone companies in this space got acquired for a combined $1.3 billion in the last year. The independent open-source position is open.</p>
-
-<p>That's what Unplug is going after. Not a feature. A category.</p>
-
-<p>Site is at <a href="https://unplug-ai.org">unplug-ai.org</a>. Code is at <a href="https://github.com/chiruu12/Unplug">github</a>.</p>
+<p>Site: <a href="https://unplug-ai.org">unplug-ai.org</a>. Code: <a href="https://github.com/UnplugAI">github.com/UnplugAI</a>.</p>
 
 <footer>
   <p><a href="./">&lt;- back to blog</a></p>
