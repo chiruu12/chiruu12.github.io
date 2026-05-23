@@ -19,23 +19,29 @@
 
 <header class="page-header">
   <h1>Unplug <span class="badge badge-wip">[WIP]</span></h1>
-  <p class="tagline">LLM defense SDK</p>
-  <p><a href="https://github.com/chiruu12/Unplug">[github]</a></p>
+  <p class="tagline">Runtime security for AI agents</p>
+  <p>
+    <a href="https://unplug-ai.org">[site]</a>
+    <a href="https://github.com/chiruu12/Unplug">[github]</a>
+  </p>
 </header>
 
 <hr>
 
 <h2>// what it does</h2>
-<p>Defense layer for LLM apps. 3-stage pipeline (regex, ML classifier, LLM judge) that catches prompt injection, data leakage, and jailbreaks in under 20ms. Span-level redaction, not binary blocking. Ships as Python SDK, self-hosted API, and MCP server.</p>
+<p>Defense layer for LLM agents. 3-stage pipeline (regex, ML classifier, LLM judge) that catches prompt injection, data leakage, destructive actions, and jailbreaks. Span-level redaction, not binary blocking. Ships as a Python SDK with a hosted API and MCP server coming next.</p>
 
 <h2>// why I built this</h2>
-<p>Every LLM app I've worked on has the same vulnerability: untrusted input goes directly into prompts. The market validates the problem (Lakera $300M, Promptfoo acquired by OpenAI), but most solutions are cloud-only and expensive. The prompt injection at the top of this site is a demo of the problem.</p>
+<p>Every agent framework I tested (9 of them: LangChain, CrewAI, OpenAI Agents SDK, etc.) has zero built-in security. Agents can now execute code, query databases, and move money, but nothing sits between what an attacker tells the agent and what the agent does. Prompt injection has been OWASP's top LLM vulnerability for three years running.</p>
+
+<h2>// what makes it different</h2>
+<p>Taint tracking. Every piece of text carries metadata about where it came from (user input vs retrieved document vs tool output). This catches indirect injection, where a malicious instruction hidden in a document the agent reads drives a destructive tool call. Most scanners treat text in isolation. Unplug tracks the full execution graph.</p>
 
 <h2>// stack</h2>
-<p>Python SDK (<code>pip install unplug</code>), FastAPI server (<code>unplug serve</code>), MCP server. Auto-instruments LangChain, CrewAI, LlamaIndex.</p>
+<p>Python SDK (<code>pip install unplug</code>). 245+ regex patterns across 15 languages, 12-stage text normalizer that beats evasion techniques (leetspeak, homoglyphs, base64, zero-width characters). ONNX classifier on CPU, no GPU needed. Planning to train a proprietary model on a synthetic dataset as threat data grows.</p>
 
 <h2>// what's next</h2>
-<p>v0.1 MVP (regex pipeline) is done. Next: ONNX classifier, framework integrations, SaaS launch.</p>
+<p>Loading the ONNX classifier, publishing to PyPI, benchmarks against public datasets. Then framework integrations starting with Agno, and a hosted API for teams that don't want to self-host.</p>
 
 <footer>
   <p><a href="../">&lt;- back home</a></p>
