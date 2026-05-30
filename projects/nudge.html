@@ -32,17 +32,27 @@
 <h2>// what it does</h2>
 <p>Press a hotkey, speak, release. Nudge transcribes your speech, classifies what you meant, and routes it to the right action: tasks, alarms, notes, clipboard, links. No wake words, no fixed commands. "Remind me to call mom tomorrow" becomes an alarm in under a second. Bring your own LLM, runs local-first.</p>
 
-<p>Built at the <strong>OpenAI x Outskill AI Builders Hackathon</strong> (May 2026), evolved from an earlier local-first voice experiment into something that ships.</p>
+<p>Built at the <strong>OpenAI x Outskill AI Builders Hackathon</strong> (May 2026), evolved from an earlier local-first voice experiment into something that ships. It's a macOS-native assistant driven by a global hotkey — <code>pip install nudge-ai</code>, <code>nudge setup</code>, and it's listening.</p>
+
+<h2>// what works today</h2>
+<ul>
+  <li><strong>7 intents, routed automatically:</strong> tasks, alarms, notes, queries, links, clipboard, and app launch — no fixed commands, just talk.</li>
+  <li><strong>Knowledge base:</strong> save thoughts by voice, recall them later with semantic search.</li>
+  <li><strong>App launcher:</strong> "open Claude Code and fix the auth bug" launches the editor with your prompt already loaded.</li>
+  <li><strong>Soul system:</strong> a <code>~/.nudge/soul.md</code> file teaches Nudge how you work — what "later" means, how you triage priority.</li>
+  <li><strong>Presets:</strong> <code>fast</code> (~200ms, free Groq tier), <code>default</code> (~500ms, balanced), <code>offline</code> (~2s, fully local via Ollama). Swap instantly.</li>
+  <li><strong>Bring your own LLM:</strong> Groq, OpenAI, Anthropic, Ollama, or LM Studio behind one interface.</li>
+</ul>
 
 <h2>// why I built this</h2>
 <p>I kept losing thoughts mid-coding-session. The friction of opening a todo app was enough to lose the idea. Nudge removes that: hotkey, talk, done.</p>
 <p>Part of a bigger picture: <a href="hive.html">Hive</a> for orchestration, <a href="unplug.html">Unplug</a> for defense, Nudge for voice. Each one explores a different facet of making AI work locally.</p>
 
 <h2>// stack</h2>
-<p>Python, built on <a href="hive.html">Hive</a> (agent runtime, intent routing, STT/LLM providers), Typer + Rich (CLI), Groq Whisper (STT). Transport-agnostic engine drives CLI, hotkey, and HTTP. <code>pip install nudge-ai</code>, then <code>nudge</code> to start.</p>
+<p>Python, built on <a href="hive.html">Hive</a> (agent runtime, intent routing, STT/LLM providers), Typer + Rich (CLI), Groq Whisper (STT), Pydantic config. A transport-agnostic engine drives the same pipeline across hotkey, CLI, and HTTP, and reports per-stage timing — STT &rarr; intent &rarr; agent, end to end around 740ms on the default preset. Sessions log to <code>~/.nudge/logs</code> as JSONL.</p>
 
 <h2>// what's next</h2>
-<p>Hosted backend with auth and STT proxy, continuous listening, calendar integration, deeper <a href="hive.html">Hive</a> agent integration for autonomous follow-ups.</p>
+<p>Hosted backend with auth and STT proxy, continuous listening, calendar integration, and deeper <a href="hive.html">Hive</a> agent integration so a single nudge can kick off an autonomous follow-up instead of a one-shot action.</p>
 
 <footer>
   <p><a href="../">&lt;- back home</a></p>
