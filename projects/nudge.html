@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nudge - Chirag Gupta</title>
+  <meta name="description" content="Nudge: voice assistant that actually gets things done. Press a hotkey, speak, and Nudge handles the rest.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- "hey siri" but it actually does the thing -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="../blog/">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>Nudge <span class="badge badge-shipped">[SHIPPED]</span></h1>
+  <p class="tagline">Voice assistant that actually gets things done. Press a hotkey, speak, and Nudge handles the rest.</p>
+  <p>
+    <a href="https://nudge-ai.org">[site]</a>
+    <a href="https://github.com/chiruu12/nudge">[github]</a>
+  </p>
+</header>
+
+<hr>
+
+<h2>// what it does</h2>
+<p>Press a hotkey, speak, release. Nudge transcribes your speech, classifies what you meant, and routes it to the right action: tasks, alarms, notes, clipboard, links. No wake words, no fixed commands. "Remind me to call mom tomorrow" becomes an alarm in under a second. Bring your own LLM, runs local-first.</p>
+
+<p>Built at the <strong>OpenAI x Outskill AI Builders Hackathon</strong> (May 2026), evolved from an earlier local-first voice experiment into something that ships.</p>
+
+<h2>// why I built this</h2>
+<p>I kept losing thoughts mid-coding-session. The friction of opening a todo app was enough to lose the idea. Nudge removes that: hotkey, talk, done.</p>
+<p>Part of a bigger picture: <a href="hive.html">Hive</a> for orchestration, <a href="unplug.html">Unplug</a> for defense, Nudge for voice. Each one explores a different facet of making AI work locally.</p>
+
+<h2>// stack</h2>
+<p>Python, built on <a href="hive.html">Hive</a> (agent runtime, intent routing, STT/LLM providers), Typer + Rich (CLI), Groq Whisper (STT). Transport-agnostic engine drives CLI, hotkey, and HTTP. <code>pip install nudge-ai</code>, then <code>nudge</code> to start.</p>
+
+<h2>// what's next</h2>
+<p>Hosted backend with auth and STT proxy, continuous listening, calendar integration, deeper <a href="hive.html">Hive</a> agent integration for autonomous follow-ups.</p>
+
+<footer>
+  <p><a href="../">&lt;- back home</a></p>
+</footer>
+
+</body>
+</html>
