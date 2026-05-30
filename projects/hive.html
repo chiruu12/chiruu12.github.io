@@ -28,7 +28,9 @@
 <h2>// what it does</h2>
 <p>Define an AI agent in YAML, give it a personality, point it at any LLM backend, and let it run. Agents persist across sessions, collaborate through shared rooms, and synthesize tools as needed. No Docker, no cloud. Your machine, your models.</p>
 
-<p>Hive is also an arena. You can pit agents against each other in structured games. The first arena game is Texas Hold'em.</p>
+<p>Agents don't just wait for instructions. A daemon runs them on a heartbeat loop where they generate their own goals from context, plan, act, and react to stressors — autonomy you can watch and inspect, not a black box.</p>
+
+<p>Hive is also a proving ground. You can pit agents against each other in structured scenarios. The first was Texas Hold'em; the latest is a locked-room murder mystery solved by three AI detectives running different models.</p>
 
 <h2>// what it can do now</h2>
 <ul>
@@ -36,6 +38,9 @@
   <li><strong>Persona system:</strong> Each agent gets a personality defined in YAML. Personas evolve based on what happens to the agent.</li>
   <li><strong>Agent-to-agent communication:</strong> Agents talk to each other through shared rooms. Multi-turn conversations between agents with different goals.</li>
   <li><strong>Suffering system:</strong> 6 stressor types that mechanically change agent behavior. Not flavor text. Stressors alter risk tolerance, decision-making, and communication style. An agent that keeps losing becomes more desperate. One that keeps winning gets overconfident.</li>
+  <li><strong>Autonomy daemon:</strong> spawn, kill, watch, and inspect long-running agents. A heartbeat loop drives self-generated goals through plan &rarr; execute &rarr; revise, with every cycle, goal, and LLM call logged to JSONL with tokens and cost.</li>
+  <li><strong>Scenario runner:</strong> drop N agents into a shared task with pluggable interaction patterns (round-table, pairs, freeform) and memory strategies (full, selective, persona). Powers the poker tournaments and the detective mystery.</li>
+  <li><strong>MCP server:</strong> control and query the hive from any MCP client.</li>
 </ul>
 
 <h2>// the poker experiment</h2>
@@ -47,15 +52,15 @@
 <p>Every agent framework I've tried either requires a PhD in configuration or ships your data to someone else's cloud. Hive is the alternative: your machine, your models, your agents. The arena is a proving ground for how agents make decisions under pressure.</p>
 
 <h2>// stack</h2>
-<p>Python, Typer CLI, YAML agent profiles, JSONL persistence + SQLite state, multi-model routing (Anthropic, OpenAI, Groq, Fireworks, Ollama, LM Studio), pokertable for game mechanics, agent-to-agent rooms, persona engine, suffering system.</p>
+<p>Python (async throughout), Typer CLI, YAML agent profiles, JSONL event logs + SQLite state (aiosqlite), multi-model routing (Anthropic, OpenAI, Groq, Fireworks, Ollama, LM Studio), autonomy daemon, scenario runner, MCP server, pokertable for game mechanics, agent-to-agent rooms, persona engine, suffering system. <code>pip install hive-agents</code>.</p>
 
 <h2>// what's next</h2>
 <ul>
   <li>Running 200-1000 poker games for statistical significance</li>
+  <li>More scenarios beyond poker and the detective mystery</li>
   <li>Persona isolation experiments: same model, different personalities</li>
-  <li>Daemon loop and full autonomy system</li>
   <li>Tool synthesis</li>
-  <li>Integration with <a href="mutter.html">Mutter</a> for voice-triggered agents</li>
+  <li>Integration with <a href="nudge.html">Nudge</a> for voice-triggered agents</li>
 </ul>
 
 <footer>
