@@ -33,9 +33,12 @@ Plain HTML + CSS, no frameworks, no build step. 90s retro aesthetic with VT323 a
 
 ## Updating the resume
 
-1. Edit `tmp/resume.html` (the source file, not tracked here)
-2. Generate PDF: `npx puppeteer-cli print tmp/resume.html resume.pdf --format A4`
-3. Copy the PDF into this repo root
+Sources are tracked in-repo: `resume.html` (public), `resume-anon.html` (redacted), and
+`resume.md` (machine-readable copy, keep in sync).
+
+1. Edit `resume.html` and `resume-anon.html`
+2. Regenerate PDFs with Chrome headless (`--print-to-pdf`); A4 is set via `@page` CSS
+3. See `CLAUDE.md` → "Resume Rebuild" for the exact commands
 
 ## Deploy
 
