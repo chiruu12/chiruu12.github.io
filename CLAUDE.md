@@ -164,12 +164,20 @@ GitHub Pages serves from main branch root. Changes go live in ~1 minute.
 
 ## Resume Rebuild
 
-The resume source lives at `tmp/resume.html` (outside this repo). To regenerate:
+The resume sources are tracked in this repo: `resume.html` (public) and `resume-anon.html`
+(redacted twin for anonymous review). Keep `resume.md` in sync as the machine-readable copy.
+Page size is set via `@page { size: A4 }` in each file's CSS. To regenerate the PDFs:
 
 ```bash
-npx puppeteer-cli print tmp/resume.html resume.pdf --format A4
-cp resume.pdf /path/to/this/repo/resume.pdf
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+"$CHROME" --headless --disable-gpu --no-pdf-header-footer \
+  --print-to-pdf=resume.pdf "file://$PWD/resume.html"
+"$CHROME" --headless --disable-gpu --no-pdf-header-footer \
+  --print-to-pdf=resume-anon.pdf "file://$PWD/resume-anon.html"
 ```
+
+Verify content + redactions with `pdftotext -layout resume-anon.pdf -` (it must not contain
+real names, employers, school, or project names).
 
 ## Rules
 

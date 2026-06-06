@@ -53,6 +53,10 @@ Mindcraft Labs | EvoAstra Ventures, May 2024 - Jan 2025
 
 ## Projects
 
+Unplug: Runtime security layer for AI agents. 3-stage pipeline (regex engine, ML classifier, LLM judge) that catches prompt injection, data leakage, and jailbreaks, with taint tracking across tool calls and span-level redaction. Ships as a Python SDK, hosted API, and MCP server.
+https://unplug-ai.org
+https://github.com/UnplugAI/Unplug
+
 Hive: Local-first agent OS. Persistent agents from YAML, multi-model routing (Claude, Codex, LM Studio), agent rooms for collaboration.
 https://github.com/chiruu12/Hive
 
@@ -74,4 +78,4 @@ Infrastructure: Docker, Git, FastAPI, Pydantic, MCP, gRPC
 
 - Top 20 in Meta Hacker Cup Open AI practice round (13,000+ participants)
 - Winner, Smart India Hackathon (SIH) 2025
-- 4th place, ContextCon (YC Hackathon)
+- 4th place, ContextCon (YC Hackathon) · YC Startup School
