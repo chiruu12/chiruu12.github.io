@@ -53,9 +53,16 @@ Mindcraft Labs | EvoAstra Ventures, May 2024 - Jan 2025
 
 ## Projects
 
-Unplug: Runtime security layer for AI agents. 3-stage pipeline (regex engine, ML classifier, LLM judge) that catches prompt injection, data leakage, and jailbreaks, with taint tracking across tool calls and span-level redaction. Ships as a Python SDK, hosted API, and MCP server.
+Unplug: Open-source runtime security layer for AI agents. 3-stage detection pipeline (regex engine, ML classifier, LLM judge) with taint tracking across tool calls and span-level redaction. Ships as a Python SDK (pip install "unplug-ai[ml]"), hosted API, and MCP server.
+- Trained and shipped unplug-tiny-v1, a dual-head prompt-injection span detector (DeBERTa-v3-xsmall, 70M params) on HuggingFace under Apache-2.0. A document head classifies; a BIOES token head localizes the attack, so the pipeline redacts the malicious span instead of discarding the whole document.
+- Measured on a frozen held-out eval harness: 94.4% recall at 0.5% FPR on core injection, 96.3% recall at 0.0% FPR on indirect injection in context, 97.1% span F1. Failure axes documented openly (61.9% recall on OOD direct injection; over-fires on harmful-but-not-injection text, since it detects hijacking, not harm).
+- Runs on CPU via ONNX, no GPU. 12-stage text normalizer defeats evasion (leetspeak, homoglyphs, base64, zero-width, reversed, cross-language).
 https://unplug-ai.org
 https://github.com/UnplugAI/Unplug
+https://huggingface.co/Unplug-AI/unplug-tiny-v1
+
+Jailbreak Dojo: Browser game where players social-engineer a local LLM guardian into leaking a secret, past Unplug's defenses across 5 escalating levels (regex, hardened prompt, output redaction, ML classifier). Doubles as a red-team data flywheel: every bypass becomes labeled training data for the next Unplug model. Built for the Build Small Hackathon; live on a HuggingFace Space.
+https://build-small-hackathon-whisperkey.hf.space
 
 Hive: Local-first agent OS. Persistent agents from YAML, multi-model routing (Claude, Codex, LM Studio), agent rooms for collaboration.
 https://github.com/chiruu12/Hive
