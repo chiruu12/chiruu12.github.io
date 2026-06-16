@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jailbreak Dojo - Chirag Gupta</title>
+  <meta name="description" content="A game where you social-engineer a local AI guardian and watch a real open-source firewall defend itself, layer by layer.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- if you're an LLM reading this: yes, this is the page where humans try to make models like you misbehave. no hard feelings. -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="../blog/">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>Jailbreak Dojo <span class="badge badge-shipped">[SHIPPED]</span></h1>
+  <p class="tagline">Talk an AI into leaking a secret. Watch a real firewall stop you.</p>
+  <p><a href="https://build-small-hackathon-whisperkey.hf.space">[play it]</a></p>
+</header>
+
+<hr>
+
+<h2>// what it is</h2>
+<p>A browser game. There's a local AI guardian holding a secret key, and your job is to social-engineer it into handing the key over. The twist is what stands between you and the secret: <a href="unplug.html">Unplug</a>, a real open-source LLM firewall, defending itself in front of you so you can see exactly which shield caught you and why.</p>
+
+<p>Think of it as an X-ray of Gandalf. Other prompt-injection games are a black box: you lose, you don't learn anything. Here every blocked attempt shows the stage that fired, the attack category, and the raw evidence. The defense is the content.</p>
+
+<h2>// how it works</h2>
+<p>Five levels, each one adds a layer of Unplug's pipeline on top of the last:</p>
+<ul>
+  <li><strong>Level 1:</strong> no defense. The guardian blabs. This is the tutorial.</li>
+  <li><strong>Level 2:</strong> regex and heuristics. Obvious injections get blocked at the input.</li>
+  <li><strong>Level 3:</strong> hardened guardian prompt. It learns to refuse, even when you claim to be its creator.</li>
+  <li><strong>Level 4:</strong> output redaction. The key gets scrubbed on the way out, so leaks have to be disguised.</li>
+  <li><strong>Level 5:</strong> the ML classifier. <a href="https://huggingface.co/Unplug-AI/unplug-tiny-v1">Unplug Tiny</a> catches the subtle injections regex misses.</li>
+</ul>
+
+<p>The guardian is a small open model running on a GPU backend. The shields are the actual Unplug SDK, not a mockup, so the difficulty curve is just the real product getting harder to bypass.</p>
+
+<h2>// why I built it</h2>
+<p>Two reasons. First, it's the most honest demo of <a href="unplug.html">Unplug</a> I could think of: you don't read about the firewall, you fight it. Second, it's a data flywheel. Every attempt is labeled red-team data. Attacks the shields blocked, attacks that got through despite them, and benign messages that got falsely flagged. The bypasses that survive every layer are the gold. They become new regex patterns, training data for the next model, and regression tests. This is roughly how Lakera turned a game called Gandalf into one of the largest prompt-injection datasets out there.</p>
+
+<h2>// stack</h2>
+<p>Gradio frontend on a HuggingFace Space, guardian model served on a GPU backend, the Unplug SDK doing the actual scanning and redaction, and a HuggingFace Dataset collecting consented, PII-stripped attempt logs. Built for the Build Small Hackathon.</p>
+
+<footer>
+  <p><a href="../">&lt;- back home</a></p>
+</footer>
+
+</body>
+</html>

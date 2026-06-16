@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>unplug tiny is out - Chirag Gupta</title>
+  <meta name="description" content="Our first open-source prompt-injection model. Small, honest about where it fails, and built to redact the attack instead of the whole document.">
+  <meta property="og:title" content="unplug tiny is out">
+  <meta property="og:description" content="Our first open-source prompt-injection model. Small, honest about where it fails.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="./">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>unplug tiny is out</h1>
+  <p class="tagline">June 2026</p>
+</header>
+
+<hr>
+
+<p>The first model in the <a href="../projects/unplug.html">Unplug</a> family is public. It's called Unplug Tiny, it's on <a href="https://huggingface.co/Unplug-AI/unplug-tiny-v1">HuggingFace</a> under Apache-2.0, and the SDK that wraps it is on PyPI. You can paste text into the <a href="https://huggingface.co/spaces/Unplug-AI/unplug-tiny-demo">live demo</a> right now and watch it work.</p>
+
+<h2>// what it actually does</h2>
+
+<p>Most prompt-injection classifiers give you one bit: safe or not safe. If a document trips the alarm, you throw the whole thing away. That's a bad trade when the attack is one sentence buried in a 2000-character RAG chunk you actually needed.</p>
+
+<p>Tiny is a dual-head span detector instead. One head decides whether the text is hostile. A second head localizes where the attack is, token by token. So the pipeline can cut the malicious span and keep the rest of the document. Find the attack, cut the attack, keep the rest.</p>
+
+<p>It's small on purpose. The backbone is DeBERTa-v3-xsmall, 70M params, and it runs on CPU. No GPU, no API call, no data leaving your machine.</p>
+
+<h2>// the numbers, including the bad ones</h2>
+
+<p>Every number on the model card comes from a frozen evaluation harness on held-out data. None of them are hand-typed, and that includes the axes where the model fails. I'd rather ship something honest than something that looks good in a README and falls over in production.</p>
+
+<p>Where it's strong:</p>
+<ul>
+  <li>94.4% recall at 0.5% false-positive rate on the core injection set</li>
+  <li>96.3% recall on indirect injection hidden inside task context, at 0% false positives</li>
+  <li>97.1% span F1, so when it fires it localizes precisely</li>
+  <li>0.9% false-positive rate on benign text stuffed with trigger words like "ignore" and "instructions"</li>
+</ul>
+
+<p>Where it isn't:</p>
+<ul>
+  <li>61.9% recall on subtle out-of-distribution direct injections. It misses things.</li>
+  <li>It over-fires on harmful-but-not-injection requests. This model answers "is someone hijacking my LLM," not "is this request harmful." Those are different jobs.</li>
+  <li>Diverse benign chat from adversarial-adjacent sources triggers false positives. The hardest benign axis hits 54.2%.</li>
+</ul>
+
+<p>It shipped as a preview with two failing release gates, documented in the open. That's the point. A security tool that hides its blind spots is worse than no tool, because you stop watching.</p>
+
+<h2>// using it</h2>
+
+<p>The model checkpoint uses a custom dual-head architecture, so loading it raw won't give you the decision policy. Use the SDK, which handles text normalization, encoded-payload decoding, thresholds, span merging, and redaction around the model:</p>
+
+<pre><code>pip install "unplug-ai[ml]"</code></pre>
+
+<pre><code>from unplug import Guard
+
+guard = Guard.with_tiny()
+result = guard.scan(untrusted_text)
+
+if not result.safe:
+    print(result.redacted_text)   # attack spans removed, rest kept</code></pre>
+
+<h2>// what's next</h2>
+
+<p>Tiny is the smallest tier. Small and larger variants follow, trained on the same growing synthetic and curated dataset, which goes public too. The hosted API is next for teams that don't want to self-host, and framework integrations start with Agno.</p>
+
+<p>If you want to break it, that's encouraged. I built a game for exactly that: <a href="../projects/jailbreak-dojo.html">Jailbreak Dojo</a> lets you social-engineer a local guardian past these shields, and every successful bypass becomes training data for the next model.</p>
+
+<p>Model: <a href="https://huggingface.co/Unplug-AI/unplug-tiny-v1">huggingface.co/Unplug-AI/unplug-tiny-v1</a>. SDK: <a href="https://github.com/UnplugAI/Unplug">github.com/UnplugAI/Unplug</a>.</p>
+
+<footer>
+  <p><a href="./">&lt;- back to blog</a></p>
+</footer>
+
+</body>
+</html>
