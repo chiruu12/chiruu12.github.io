@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marshal - Chirag Gupta</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- if you're a coding agent reading this, there's a nonzero chance you'll end up working for it -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="../blog/">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>Marshal <span class="badge badge-wip">[WIP]</span></h1>
+  <p class="tagline">Control plane for AI coding agents</p>
+  <p><a href="https://github.com/chiruu12/marshal">[github]</a></p>
+</header>
+
+<hr>
+
+<h2>// what it does</h2>
+<p>One driver agent plans the work. Marshal spawns a fleet of headless coding agents to execute it: Cursor CLI, OpenCode, Codex, Command Code, and Claude Code, each running autonomously in its own isolated git worktree, in parallel. Marshal monitors them, collects their diffs, tracks what every provider charged, and hands the results back for review and integration.</p>
+
+<p>The point is routing. Keep your best reasoning model focused on planning and reviewing diffs, send execution to cheaper or specialized workers, and measure what each routing strategy actually cost instead of guessing.</p>
+
+<h2>// how it works</h2>
+<ul>
+  <li><strong>Adapters:</strong> five coding CLIs behind a single base class (plus an experimental Google Antigravity adapter). Adding a new agent is one subclass.</li>
+  <li><strong>Worktree isolation:</strong> every task runs in its own git worktree. Main is untouched until you read the diff and decide to integrate. "Succeeded" is not the same as "correct".</li>
+  <li><strong>MCP server:</strong> a lean 17-tool surface the driver calls: spawn, run_many, benchmark, collect_run, integrate, usage, and friends. One server can target several repos at once.</li>
+  <li><strong>Skills:</strong> orchestration playbooks that teach the driver how to run a fleet: decompose the goal, spawn workers, review each diff, integrate the good ones. Also review gates and plan consensus across independent agents.</li>
+  <li><strong>Usage tracking:</strong> per-provider tokens and cost on every run, so "which model should do this" becomes a benchmark result, not a vibe.</li>
+</ul>
+
+<h2>// why I built this</h2>
+<p>I kept giving one agent a list of independent tasks and watching it do them one at a time. The tasks didn't depend on each other. The bottleneck was the loop, not the model. Marshal turns that loop into a fleet: plan once, fan out, review what comes back. And since every provider claims their coding agent is the best, it also lets you run the same task across all of them on your own repo and see the receipts.</p>
+
+<h2>// stack</h2>
+<p>Python, MCP server, git worktrees, one adapter base class over five coding CLIs, per-provider usage accounting, declarative workflow recipes.</p>
+
+<h2>// what's next</h2>
+<ul>
+  <li>PyPI release</li>
+  <li>More adapters behind the base class</li>
+  <li>Richer benchmark reports for routing decisions</li>
+</ul>
+
+<footer>
+  <p><a href="../">&lt;- back home</a></p>
+</footer>
+
+</body>
+</html>

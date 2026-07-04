@@ -49,7 +49,7 @@ https://github.com/jenkinsci/domain-llm
 Mindcraft Labs | EvoAstra Ventures, May 2024 - Jan 2025
 
 - Mindcraft Labs: Automated 19+ workflows with RETELL, Voiceflow, and Make
-- EvoAstra Ventures: Built fraud-detection model on 6.3M+ records, 96.5% accuracy, 94% fraud recall
+- EvoAstra Ventures: Built fraud-detection model on 6.3M+ records, 94% fraud recall
 
 ## Projects
 
