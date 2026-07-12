@@ -19,6 +19,10 @@
   --badge-pypi-text: #004085;
   --injection-bg: #1a1a1a;
   --injection-text: #33ff33;
+  --text-muted: #555;
+  --text-faint: #888;
+  --surface: #fff;
+  --surface-code: #faf7f0;
   --max-width: 720px;
 }
 
@@ -90,7 +94,7 @@ hr {
 
 /* Page header */
 .page-header { margin-bottom: 2rem; }
-.page-header .tagline { font-size: 0.9rem; margin-top: 0.5rem; color: #555; }
+.page-header .tagline { font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-muted); }
 .page-header .visitor-counter {
   display: inline-block;
   background: #333;
@@ -107,7 +111,7 @@ hr {
 
 /* Injection box / terminal message */
 .injection-box {
-  background: #fff;
+  background: var(--surface);
   font-family: 'Space Mono', monospace;
   font-size: 0.85rem;
   padding: 0.8rem 1.25rem;
@@ -136,7 +140,7 @@ hr {
 }
 
 .project-card h3 a { color: var(--text); }
-.project-card p { margin-top: 0.4rem; font-size: 0.9rem; color: #555; }
+.project-card p { margin-top: 0.4rem; font-size: 0.9rem; color: var(--text-muted); }
 
 /* Badges */
 .badge {
@@ -161,8 +165,8 @@ hr {
 }
 
 .blog-post-preview a { font-weight: 700; font-size: 0.95rem; }
-.blog-post-preview .date { font-size: 0.75rem; color: #888; margin-left: 0.5rem; }
-.blog-post-preview p { font-size: 0.85rem; color: #555; margin-top: 0.25rem; }
+.blog-post-preview .date { font-size: 0.75rem; color: var(--text-faint); margin-left: 0.5rem; }
+.blog-post-preview p { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
 
 /* Tables */
 table {
@@ -188,7 +192,7 @@ th {
 caption {
   text-align: left;
   font-size: 0.8rem;
-  color: #555;
+  color: var(--text-muted);
   margin-bottom: 0.5rem;
 }
 
@@ -198,7 +202,7 @@ tr:last-child td {
 
 /* Code blocks */
 pre {
-  background: #faf7f0;
+  background: var(--surface-code);
   border: 1px dashed var(--border-strong);
   border-left: 3px solid var(--accent-green);
   padding: 0.75rem 1rem;
@@ -227,8 +231,9 @@ pre code { font-size: inherit; }
 .exp-item:last-child { border-bottom: none; }
 
 .exp-role { font-weight: 700; font-size: 0.9rem; }
-.exp-company { font-size: 0.9rem; color: #555; }
-.exp-date { font-size: 0.75rem; color: #888; white-space: nowrap; }
+.exp-company { font-size: 0.9rem; color: var(--text-muted); }
+.exp-date { font-size: 0.75rem; color: var(--text-faint); white-space: nowrap; }
+.exp-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; }
 
 /* Section headers with color accents */
 .section-about h2 { color: var(--accent-blue); }
@@ -247,10 +252,10 @@ footer {
   padding-top: 1.5rem;
   border-top: 2px dashed var(--border);
   font-size: 0.8rem;
-  color: #888;
+  color: var(--text-faint);
 }
 
-footer a { color: #888; }
+footer a { color: var(--text-faint); }
 footer p { margin-bottom: 0.3rem; }
 
 /* Responsive */
@@ -286,4 +291,27 @@ footer p { margin-bottom: 0.3rem; }
   th, td {
     padding: 0.4rem 0.5rem;
   }
+}
+
+/* Dark mode — amber/green CRT variant, follows the OS preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15130f;
+    --text: #d8d0c0;
+    --link: #6cb6ff;
+    --link-visited: #c9a9ff;
+    --border: #45403a;
+    --border-strong: #6b6458;
+    --accent-green: #6ab77e;
+    --accent-orange: #ffa64d;
+    --accent-blue: #6ca0e0;
+    --accent-red: #d97070;
+    --text-muted: #a89f8f;
+    --text-faint: #8a8275;
+    --surface: #0d0d0d;
+    --surface-code: #1c1a16;
+  }
+
+  .injection-box .ok { color: #33ff33; }
+  .injection-box .blocked { color: #ff5555; }
 }
