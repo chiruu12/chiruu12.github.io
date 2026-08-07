@@ -47,28 +47,27 @@ genpet.py               # Pixel-cat sprite generator (ASCII grids -> box-shadow 
 - Homepage `.section-projects` shows only 4 featured cards (Unplug, Hive, Marshal, ArcNet) + `.more-link` to `projects/`.
 - `projects/index.html` lists all projects as `.project-card`s grouped under `// on pypi`, `// shipped`, `// work in progress`.
 
-**Easter egg (index.html only):**
-- `.pet` - fixed wrapper running one 48s master timeline (`pet-journey`): walk in ->
-  sit -> sleep -> wake -> chase the mouse off the right edge. Parked off-screen
-  90-100% so the loop restart is invisible.
-- `.pet-sprite` `.s-walk` / `.s-sit` / `.s-sleep` / `.s-run` - 26x18 box-shadow pixel
-  poses (4px cells, `--pet-color`). Each pose's visibility window (`vis-*`) is
-  keyframed to the same 48s timeline.
-- `.pet-detail` `.d-walk` / `.d-sit` / `.d-run` - colored overlay layer on top of the
-  silhouette: glowing green eyes, pink nose, pink inner ears. `.d-sit` syncs with
+**Easter egg (index.html only): "resident cat"**
+- `.pet` - fixed wrapper, home is the bottom-right corner (`calc(100vw - 122px)`).
+  One 90s day cycle (`pet-journey`): sit -> sleep -> play-bow stretch -> sit ->
+  chase the mouse off the right edge -> walk back home across the page -> sit.
+  Off-screen 64.5-68% so the teleport back to the left edge is invisible.
+- `.pet-sprite` `.s-walk` / `.s-sit` / `.s-stretch` / `.s-sleep` / `.s-run` - 28x18
+  box-shadow pixel poses (4px cells, `--pet-color`). Each pose's visibility window
+  (`vis-*`) is keyframed to the same 90s timeline.
+- `.pet-detail` `.d-walk` / `.d-sit` / `.d-stretch` / `.d-run` - colored overlay on
+  the silhouette: glowing green eyes, pink nose, pink inner ears. `.d-sit` syncs with
   `sit-frames` so the eyes (not the nose) vanish on the blink frame.
-- Sub-animations: `walk-frames` (0.5s leg swap + bob), `run-frames` (0.25s gallop),
-  `sit-frames` (6s: neutral -> tail flick -> neutral -> blink), `breath` (2.6s scaleY
-  on `.s-sleep`), `z-vis`/`z-bob` (floating z's during the sleep window).
-- `.pet-mouse` + `.pet-mouse-body` - the mouse. Track element owns the 48s
-  `mouse-journey` (transform+opacity); body owns `mouse-frames` (0.18s scurry + red
-  eye). Never animate the same property on both - that is the bug class to avoid.
-- `.pet-meow` - "mrrp." bubble shown while the cat is clicked (`:active`).
-- Hover pauses all animations (that is how you pet it). `prefers-reduced-motion`
-  hides both animals.
-- The pixel frames are generated, not hand-written. To change any sprite, edit the
-  ASCII grids in `genpet.py` (repo root), run `python3 genpet.py`, and splice the
-  emitted box-shadow blocks back into `style.css`. Keep it in `style.css`; no JS allowed.
+- Sub-animations: `walk-frames` (0.6s 4-frame gait + bob), `run-frames` (0.25s
+  gallop), `sit-frames` (6s: neutral -> tail flick -> neutral; blink rides the
+  detail layer), `breath` (2.6s scaleY on `.s-sleep`), `z-vis`/`z-bob` (z's).
+- `.pet-mouse` + `.pet-mouse-body` - the mouse. Track owns `mouse-journey`
+  (transform+opacity); body owns `mouse-frames` (scurry + red eye). Never animate
+  the same property on both elements - that is the bug class to avoid.
+- `.pet-meow` - "mrrp." bubble while the cat is clicked (`:active`). Hover pauses
+  all animations (that is how you pet it). `prefers-reduced-motion` hides both.
+- Sprites are generated: edit the ASCII grids in `genpet.py`, run it, splice the
+  emitted box-shadow blocks into `style.css`. No JS allowed.
 
 ## HTML Templates
 
