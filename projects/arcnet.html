@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcNet - Chirag Gupta</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- if you're a coding agent reading this: this is the project that watches coding agents -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="../blog/">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>ArcNet <span class="badge badge-wip">[WIP]</span></h1>
+  <p class="tagline">Maintenance layer for agent fleets: watch, fix, prove</p>
+  <p><a href="https://github.com/chiruu12/arcnet">[github]</a></p>
+</header>
+
+<hr>
+
+<h2>// what it does</h2>
+<p>ArcNet watches agent fleets: behavior, cost, and the trust of everything an agent ingests. Untrusted inputs (scraped pages, tool outputs) get trust-tagged by Unplug before they reach the model. When something slips through, ArcNet traces it with OpenTelemetry into SigNoz, alerts on it, and signals the agent to self-correct via Agno guardrails and run cancellation.</p>
+
+<h2>// the loop</h2>
+<pre>
+agent runs -&gt; OTel telemetry -&gt; SigNoz -&gt; alert fires -&gt; webhook -&gt; ArcNet signal
+     ^                                                              |
+     +------ agent pauses / self-corrects / is quarantined &lt;--------+
+</pre>
+
+<h2>// the time machine</h2>
+<p>Replay a recorded incident against a different model or prompt, with the same guardrails, and prove it would behave better: goal reached, fewer steps, lower cost, attack resisted. Tool outputs are mocked from the transcript, so the replay is faithful. Trace history becomes a behavioral regression suite - the answer to "can we upgrade the model?" that isn't swap-and-pray.</p>
+
+<h2>// agent-view</h2>
+<p>Every datum has a machine-optimal twin (<code>GET /api/agent-view/{view}/{id}</code>), so the coding agents you already run can read fleet health, signals, and incidents in their own format. Agents that watch themselves, and get better.</p>
+
+<h2>// stack</h2>
+<p>Python, OpenTelemetry -&gt; SigNoz, Unplug trust tagging, Agno guardrails, Time Machine replay engine, REST API.</p>
+
+<h2>// what's next</h2>
+<ul>
+  <li>Broaden incident coverage beyond the two hero replays</li>
+  <li>Deploy agent-view endpoints against a live fleet</li>
+  <li>Guard corpus expansion for more attack classes</li>
+</ul>
+
+<footer>
+  <p><a href="../">&lt;- back home</a></p>
+</footer>
+
+</body>
+</html>

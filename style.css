@@ -315,3 +315,134 @@ footer p { margin-bottom: 0.3rem; }
   .injection-box .ok { color: #33ff33; }
   .injection-box .blocked { color: #ff5555; }
 }
+
+/* Pixel cat easter egg. Pure CSS, no JS. Walks across the bottom of the viewport. */
+.pet {
+  position: fixed;
+  bottom: 12px;
+  left: 0;
+  z-index: 999;
+  width: 44px;
+  height: 34px;
+  animation: pet-stroll 46s linear infinite;
+}
+
+.pet:hover,
+.pet:hover * {
+  animation-play-state: paused;
+}
+
+.pet-head {
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  width: 34px;
+  height: 24px;
+  background: #0f0f0f;
+  border: 1px solid #4a4a4a;
+}
+
+.pet-ear {
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background: #0f0f0f;
+  border: 1px solid #4a4a4a;
+  transform: rotate(45deg);
+}
+
+.pet-ear-l { left: 6px; }
+.pet-ear-r { right: 6px; }
+
+.pet-eye {
+  position: absolute;
+  top: 7px;
+  width: 4px;
+  height: 5px;
+  background: #39ff14;
+  box-shadow: 0 0 6px #39ff14;
+  animation: pet-blink 4.2s infinite;
+}
+
+.pet-eye-l { left: 8px; }
+.pet-eye-r { right: 8px; }
+
+.pet-nose {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  width: 6px;
+  height: 4px;
+  margin-left: -3px;
+  background: #ff6b9d;
+  border-radius: 50%;
+}
+
+.pet-tail {
+  position: absolute;
+  top: 14px;
+  right: -2px;
+  width: 12px;
+  height: 4px;
+  background: #0f0f0f;
+  border: 1px solid #4a4a4a;
+  transform-origin: 0 50%;
+  animation: pet-tail-wag 1.2s ease-in-out infinite;
+}
+
+.pet-leg {
+  position: absolute;
+  bottom: 0;
+  width: 5px;
+  height: 5px;
+  background: #0f0f0f;
+  border: 1px solid #4a4a4a;
+  transform-origin: 50% 0;
+  animation: pet-step 0.5s ease-in-out infinite;
+}
+
+.pet-leg-fl { left: 8px; }
+.pet-leg-fr { left: 16px; animation-delay: 0.25s; }
+.pet-leg-bl { left: 24px; animation-delay: 0.12s; }
+.pet-leg-br { left: 32px; animation-delay: 0.37s; }
+
+@keyframes pet-stroll {
+  0%   { transform: translateX(-60px) translateY(0); }
+  8%   { transform: translateX(calc(12vw - 60px)) translateY(-3px); }
+  16%  { transform: translateX(calc(24vw - 60px)) translateY(0); }
+  24%  { transform: translateX(calc(36vw - 60px)) translateY(-3px); }
+  32%  { transform: translateX(calc(48vw - 60px)) translateY(0); }
+  40%  { transform: translateX(calc(60vw - 60px)) translateY(-3px); }
+  48%  { transform: translateX(calc(72vw - 60px)) translateY(0); }
+  56%  { transform: translateX(calc(84vw - 60px)) translateY(-3px); }
+  64%  { transform: translateX(calc(96vw - 60px)) translateY(0); }
+  72%  { transform: translateX(calc(108vw - 60px)) translateY(-3px); }
+  80%  { transform: translateX(calc(116vw - 60px)) translateY(0); }
+  81%  { transform: translateX(-60px) translateY(0); }
+  100% { transform: translateX(-60px) translateY(0); }
+}
+
+@keyframes pet-step {
+  0%, 100% { transform: rotate(-14deg); }
+  50%      { transform: rotate(14deg); }
+}
+
+@keyframes pet-tail-wag {
+  0%, 100% { transform: rotate(10deg); }
+  50%      { transform: rotate(-30deg); }
+}
+
+@keyframes pet-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95%           { transform: scaleY(0.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet,
+  .pet-leg,
+  .pet-tail,
+  .pet-eye {
+    animation: none;
+  }
+}

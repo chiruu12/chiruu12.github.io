@@ -8,6 +8,7 @@ Personal site. Plain HTML + CSS, GitHub Pages deployment.
 index.html              # Homepage with all sections
 style.css               # Global stylesheet (shared via ../style.css from subpages)
 achievements.html       # Achievements page
+404.html                # Custom 404 (GitHub Pages serves it automatically)
 resume.pdf              # Generated PDF (binary, do not edit)
 resume.md               # Machine-readable resume for LLMs/agents
 blog/index.html         # Blog listing
@@ -39,6 +40,11 @@ projects/*.html         # Project detail pages
 - `.exp-item` - flex row (role + company + date)
 - `.injection-box` - fake terminal prompt joke at top
 - `.visitor-counter` - green-on-black counter text
+
+**Easter egg (index.html only):**
+- `.pet` + `.pet-head` / `.pet-ear` / `.pet-eye` / `.pet-nose` / `.pet-tail` / `.pet-leg` - pure CSS pixel cat
+  that walks across the bottom of the viewport. Hover pauses it. `prefers-reduced-motion` disables it.
+  Keep it in `style.css`; no JS allowed.
 
 ## HTML Templates
 
