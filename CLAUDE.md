@@ -13,7 +13,9 @@ resume.pdf              # Generated PDF (binary, do not edit)
 resume.md               # Machine-readable resume for LLMs/agents
 blog/index.html         # Blog listing
 blog/*.html             # Blog posts
+projects/index.html      # Full projects archive (all 10, grouped by status)
 projects/*.html         # Project detail pages
+genpet.py               # Pixel-cat sprite generator (ASCII grids -> box-shadow CSS)
 ```
 
 ## CSS Classes Reference
@@ -41,10 +43,23 @@ projects/*.html         # Project detail pages
 - `.injection-box` - fake terminal prompt joke at top
 - `.visitor-counter` - green-on-black counter text
 
+**Projects sections:**
+- Homepage `.section-projects` shows only 4 featured cards (Unplug, Hive, Marshal, ArcNet) + `.more-link` to `projects/`.
+- `projects/index.html` lists all projects as `.project-card`s grouped under `// on pypi`, `// shipped`, `// work in progress`.
+
 **Easter egg (index.html only):**
-- `.pet` + `.pet-head` / `.pet-ear` / `.pet-eye` / `.pet-nose` / `.pet-tail` / `.pet-leg` - pure CSS pixel cat
-  that walks across the bottom of the viewport. Hover pauses it. `prefers-reduced-motion` disables it.
-  Keep it in `style.css`; no JS allowed.
+- `.pet` - fixed-position wrapper running one 48s master timeline (`pet-journey`):
+  walk in from the left -> sit -> sleep -> sit -> walk off right. Parked off-screen
+  96-100% so the loop restart is invisible.
+- `.pet-sprite` + `.s-walk` / `.s-sit` / `.s-sleep` - the three poses. Each is a 4px
+  box-shadow pixel sprite (26x18 grid) colored by `--pet-color`. Visibility windows
+  (`vis-walk` / `vis-sit` / `vis-sleep`) are keyframed to the same 48s timeline.
+  `.s-walk` also runs `walk-frames` (0.5s leg swap), `.s-sit` runs `sit-blink` (5s).
+- `.pet-z` x3 - floating "z" letters, visible only in the sleep window (`z-vis`).
+- Hover pauses all animations (that is how you pet it). `prefers-reduced-motion` hides the cat entirely.
+- The pixel frames are generated, not hand-written. To change the sprite, edit the
+  ASCII grids in `genpet.py` (repo root), run `python3 genpet.py`, and splice the
+  emitted box-shadow blocks back into `style.css`. Keep it in `style.css`; no JS allowed.
 
 ## HTML Templates
 
