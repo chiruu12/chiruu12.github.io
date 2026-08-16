@@ -45,7 +45,7 @@ https://github.com/jenkinsci/domain-llm
 ### AI & Data Science Intern
 Mindcraft Labs | EvoAstra Ventures, May 2024 - Jan 2025
 
-- Mindcraft Labs: automated 19+ workflows (RETELL, Voiceflow, Make). EvoAstra: fraud-detection model on 6.3M+ records at 94% recall
+- **Mindcraft Labs:** automated 19+ workflows (RETELL, Voiceflow, Make). **EvoAstra:** fraud-detection model on 6.3M+ records at 94% recall
 
 ## Projects
 
