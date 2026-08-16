@@ -19,7 +19,7 @@
   .header { border-bottom: 2.5px solid #1a5276; padding-bottom: 7px; margin-bottom: 9px; }
   .name { font-size: 25px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 5px; }
   .contact { font-size: 9.7px; color: #333; margin: 1px 0; }
-  .contact .sep { color: #8a8a8a; padding: 0 4px; }
+  .contact .sep, .sep { color: #8a8a8a; padding: 0 5px; }
   .profile { margin: 8px 0 0; }
   h2 {
     color: #1a5276;
@@ -29,9 +29,9 @@
     text-transform: uppercase;
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 3px;
-    margin: 12px 0 6px;
+    margin: 10px 0 5px;
   }
-  .entry { margin-bottom: 7px; }
+  .entry { margin-bottom: 5.5px; }
   .row { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
   .role { font-weight: 700; }
   .date { white-space: nowrap; font-style: italic; color: #555; font-size: 9.6px; }
@@ -42,6 +42,8 @@
   li::marker { color: #1a5276; }
   p { margin: 2px 0; }
   .tight { margin: 2px 0; }
+  .subproj { padding-left: 10px; border-left: 2px solid #dfe4e8; margin: 3px 0 4px 1px; }
+  .subproj > ul { padding-left: 15px; }
   .proj { margin-bottom: 5px; }
   .proj .pname { font-weight: 700; }
 </style>
@@ -55,27 +57,33 @@
     <p class="profile">AI engineer building multi-agent systems and agent infrastructure. GSoC '25 contributor and '26 mentor at Jenkins.</p>
   </div>
 
-  <h2>Professional Experience</h2>
+  <h2>Experience</h2>
 
   <div class="entry">
     <div class="row"><span class="role">AI Engineer, GoManzanas (US Startup)</span><span class="date">May 2025 - Present</span></div>
     <div class="meta">Remote</div>
-    <p class="tight"><span class="sub">AEGIS, Multi-Agent Pipeline:</span> Detected pirated CAD software usage by analyzing telemetry and signal patterns.</p>
-    <ul>
-      <li>Built multi-agent pipeline for pirated CAD detection: 89% precision (94% manual baseline), 95% cost reduction ($1.06 to $0.05/case)</li>
-      <li>Built multi-backend LLM orchestration with fallback logic and stage-specific prompting</li>
-    </ul>
-    <p class="tight"><span class="sub">Ace1t, Real-Time Voice AI:</span> Built voice-AI backend for a real-time accent training platform.</p>
-    <ul>
-      <li>Integrated multiple TTS models with ASR (OpenAI Whisper, FastConformer) for real-time voice processing</li>
-      <li>Designed push-to-talk pipeline with streaming audio, model-driven speech control, and silence handling</li>
-    </ul>
-    <p class="tight"><span class="sub">Booster, AI Collaboration Platform:</span> Built multi-agent infrastructure for an ideation platform (FastAPI + React + PostgreSQL).</p>
-    <ul>
-      <li>Built multi-agent group chat with turn-based orchestration and real-time collaboration across agent personas</li>
-      <li>Designed containerized code execution environment and agent session lifecycle with idle cleanup and queue-based concurrency</li>
-      <li>Built custom MCP server, skills system with model tiering, and agent benchmarking framework</li>
-    </ul>
+    <div class="subproj">
+      <p class="tight"><span class="sub">AEGIS, Multi-Agent Pipeline:</span> Detected pirated CAD software usage by analyzing telemetry and signal patterns.</p>
+      <ul>
+        <li>Built multi-agent pipeline for pirated CAD detection: 89% precision (94% manual baseline), 95% cost reduction ($1.06 to $0.05/case)</li>
+        <li>Built multi-backend LLM orchestration with fallback logic and stage-specific prompting</li>
+      </ul>
+    </div>
+    <div class="subproj">
+      <p class="tight"><span class="sub">Ace1t, Real-Time Voice AI:</span> Built voice-AI backend for a real-time accent training platform.</p>
+      <ul>
+        <li>Integrated multiple TTS models with ASR (OpenAI Whisper, FastConformer) for real-time voice processing</li>
+        <li>Designed push-to-talk pipeline with streaming audio, model-driven speech control, and silence handling</li>
+      </ul>
+    </div>
+    <div class="subproj">
+      <p class="tight"><span class="sub">Booster, AI Collaboration Platform:</span> Built multi-agent infrastructure for an ideation platform (FastAPI + React + PostgreSQL).</p>
+      <ul>
+        <li>Built multi-agent group chat with turn-based orchestration and real-time collaboration across agent personas</li>
+        <li>Designed containerized code execution environment and agent session lifecycle with idle cleanup and queue-based concurrency</li>
+        <li>Built custom MCP server, skills system with model tiering, and agent benchmarking framework</li>
+      </ul>
+    </div>
   </div>
 
   <div class="entry">
@@ -99,9 +107,9 @@
   <div class="entry">
     <div class="role">Open Source</div>
     <ul>
+      <li>Merged upstream fixes, 2026: keephq/keep, datalayer/jupyter-mcp-server (stale-tool fallback and concurrent-miss coalescing), topoteretes/cognee, HKUDS/DeepTutor</li>
       <li>Rago (OSL Incubator): Added 5 API backends (Cohere, Fireworks, Together, Groq, HuggingFace) for embeddings and generation. 7 merged PRs.</li>
-      <li>Keras: Integrated np.diff and np.log2 via OpenVINO backend.</li>
-      <li>Agno: Added Exa Answer method, migrated deprecated models across 7+ providers, URL expansion for Crawl4ai.</li>
+      <li>Keras: np.diff and np.log2 via the OpenVINO backend. Agno: Exa Answer method, deprecated-model migration across 7+ providers, Crawl4ai URL expansion.</li>
     </ul>
   </div>
 
@@ -125,7 +133,7 @@
   </div>
 
   <div class="proj">
-    <span class="pname">NexNet:</span> Neural network framework from scratch in NumPy. BERT and GPT with multi-head attention and positional encoding. No PyTorch, no TensorFlow. <a href="https://github.com/chiruu12/NexNet">github.com/chiruu12/NexNet</a>
+    <span class="pname">Marshal:</span> Runs a fleet of headless coding agents (Claude Code, Codex, Cursor, OpenCode) in parallel, each in an isolated git worktree, with a per-provider cost ledger. CLI, MCP server, and Claude Code plugin; on PyPI as marshal-agents. One task across four backends, measured from the ledger: the cheapest correct run cost 1/115th of the most expensive. <a href="https://github.com/chiruu12/marshal">github.com/chiruu12/marshal</a>
   </div>
 
   <h2>Education</h2>
@@ -136,15 +144,11 @@
 
   <h2>Skills</h2>
   <p class="tight"><span class="sub">Languages:</span> Python, C/C++, SQL</p>
-  <p class="tight"><span class="sub">ML/AI:</span> PyTorch, LangChain, vLLM, Ray, Hugging Face Transformers, MLFlow</p>
-  <p class="tight"><span class="sub">Infrastructure:</span> Docker, Git, FastAPI, Pydantic, MCP, gRPC</p>
+  <p class="tight"><span class="sub">ML/AI:</span> PyTorch, Hugging Face Transformers, ONNX Runtime, vLLM, LangChain, MLflow</p>
+  <p class="tight"><span class="sub">Infrastructure:</span> Docker, Git, FastAPI, Pydantic, PostgreSQL, MCP, gRPC</p>
 
   <h2>Achievements</h2>
-  <ul>
-    <li>Top 20 in Meta Hacker Cup Open AI practice round (13,000+ participants)</li>
-    <li>Winner, Smart India Hackathon (SIH) 2025</li>
-    <li>4th place, ContextCon (YC Hackathon) · YC Startup School</li>
-  </ul>
+  <p class="tight">Top 20, Meta Hacker Cup Open AI practice round (13,000+ entrants)<span class="sep">·</span>Winner, Smart India Hackathon 2025<span class="sep">·</span>4th place, ContextCon (YC hackathon)</p>
 
 </body>
 </html>

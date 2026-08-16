@@ -7,7 +7,7 @@ https://linkedin.com/in/chiruu12 | https://github.com/chiruu12 | https://chiruu1
 
 AI engineer building multi-agent systems and agent infrastructure. GSoC '25 contributor and '26 mentor at Jenkins.
 
-## Professional Experience
+## Experience
 
 ### AI Engineer, GoManzanas (US Startup)
 May 2025 - Present | Remote
@@ -41,9 +41,9 @@ https://github.com/jenkinsci/domain-llm
 
 ### Open Source Contributions
 
+- Merged upstream fixes, 2026: keephq/keep, datalayer/jupyter-mcp-server (stale-tool fallback and concurrent-miss coalescing), topoteretes/cognee, HKUDS/DeepTutor
 - Rago (OSL Incubator): Added 5 API backends (Cohere, Fireworks, Together, Groq, HuggingFace) for embeddings and generation. 7 merged PRs.
-- Keras: Integrated np.diff, np.log2 via OpenVINO backend
-- Agno: Added Exa Answer method, migrated deprecated models across 7+ providers, URL expansion for Crawl4ai
+- Keras: np.diff and np.log2 via the OpenVINO backend. Agno: Exa Answer method, deprecated-model migration across 7+ providers, Crawl4ai URL expansion.
 
 ### AI & Data Science Intern
 Mindcraft Labs | EvoAstra Ventures, May 2024 - Jan 2025
@@ -67,8 +67,10 @@ https://build-small-hackathon-whisperkey.hf.space
 Hive: Local-first agent OS. Persistent agents from YAML, multi-model routing (Claude, Codex, LM Studio), agent rooms for collaboration.
 https://github.com/chiruu12/Hive
 
-NexNet: Neural network framework from scratch in NumPy. BERT and GPT with multi-head attention and positional encoding. No PyTorch, no TensorFlow.
-https://github.com/chiruu12/NexNet
+Marshal: Orchestration engine that runs a fleet of headless coding agents (Claude Code, Codex, Cursor, OpenCode) in parallel, each in an isolated git worktree, with a per-provider cost ledger. Ships as a CLI, an MCP server, and a Claude Code plugin; on PyPI as marshal-agents.
+- One task benchmarked across four backends, measured from the ledger: the cheapest correct run cost 1/115th of the most expensive.
+https://github.com/chiruu12/marshal
+https://pypi.org/project/marshal-agents/
 
 ## Education
 
@@ -78,11 +80,11 @@ BITS Pilani, Goa Campus, Goa, India | 2021 - 2026
 ## Skills
 
 Languages: Python, C/C++, SQL
-ML/AI: PyTorch, LangChain, vLLM, Ray, Hugging Face Transformers, MLFlow
-Infrastructure: Docker, Git, FastAPI, Pydantic, MCP, gRPC
+ML/AI: PyTorch, Hugging Face Transformers, ONNX Runtime, vLLM, LangChain, MLflow
+Infrastructure: Docker, Git, FastAPI, Pydantic, PostgreSQL, MCP, gRPC
 
 ## Achievements
 
-- Top 20 in Meta Hacker Cup Open AI practice round (13,000+ participants)
+- Top 20, Meta Hacker Cup Open AI practice round (13,000+ entrants)
 - Winner, Smart India Hackathon (SIH) 2025
-- 4th place, ContextCon (YC Hackathon) · YC Startup School
+- 4th place, ContextCon (YC Startup School hackathon)
