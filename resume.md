@@ -5,7 +5,7 @@ https://linkedin.com/in/chiruu12 | https://github.com/chiruu12 | https://chiruu1
 
 ## Profile
 
-AI engineer building multi-agent systems and agent infrastructure. GSoC '25 contributor and '26 mentor at Jenkins.
+AI engineer building multi-agent systems and the infrastructure that makes them measurable: cost accounting, evaluation, and runtime security for LLM agents.
 
 ## Experience
 
@@ -13,12 +13,10 @@ AI engineer building multi-agent systems and agent infrastructure. GSoC '25 cont
 May 2025 - Present | Remote
 
 AEGIS, Multi-Agent Pipeline: Detected pirated CAD software usage by analyzing telemetry and signal patterns.
-- Built multi-agent pipeline for pirated CAD detection: 89% precision (94% manual baseline), 95% cost reduction ($1.06 to $0.05/case)
-- Built multi-backend LLM orchestration with fallback logic and stage-specific prompting
+- Staged multi-agent pipeline over multi-backend LLM orchestration (fallback routing, stage-specific prompting): 89% precision against a 94% manual baseline at $0.05/case, down from $1.06
 
 Ace1t, Real-Time Voice AI: Built voice-AI backend for a real-time accent training platform.
-- Integrated multiple TTS models with ASR (OpenAI Whisper, FastConformer) for real-time voice processing
-- Designed push-to-talk pipeline with streaming audio, model-driven speech control, and silence handling
+- Built the streaming push-to-talk pipeline end to end: multiple TTS models behind Whisper and FastConformer ASR, model-driven speech control, silence handling
 
 Booster, AI Collaboration Platform: Built multi-agent infrastructure for an ideation platform (FastAPI + React + PostgreSQL).
 - Built multi-agent group chat with turn-based orchestration and real-time collaboration across agent personas
@@ -29,9 +27,8 @@ Booster, AI Collaboration Platform: Built multi-agent infrastructure for an idea
 May 2025 - Present
 https://github.com/jenkinsci/domain-llm
 
-- Built modular multi-agent diagnostic system (log-parser, classifier, recommender) for Jenkins build failures
+- Built modular multi-agent diagnostic system (log-parser, classifier, recommender) for Jenkins build failures, across OpenAI, Gemini, and Claude backends
 - Added vector-store RAG layer, benchmarked on 20 curated questions: 95% context relevance, 3.75/5.0 overall score
-- Integrated multi-backend LLM adapter (OpenAI, Gemini, Claude) with mode-switching for analysis vs recommendation
 
 ### AI Engineer, Reasonify Technology Pvt Ltd
 
@@ -41,15 +38,14 @@ https://github.com/jenkinsci/domain-llm
 
 ### Open Source Contributions
 
-- Merged upstream fixes, 2026: keephq/keep, datalayer/jupyter-mcp-server (stale-tool fallback and concurrent-miss coalescing), topoteretes/cognee, HKUDS/DeepTutor
+- Merged upstream fixes: keephq/keep, datalayer/jupyter-mcp-server (stale-tool fallback and concurrent-miss coalescing), topoteretes/cognee, HKUDS/DeepTutor
 - Rago (OSL Incubator): Added 5 API backends (Cohere, Fireworks, Together, Groq, HuggingFace) for embeddings and generation. 7 merged PRs.
 - Keras: np.diff and np.log2 via the OpenVINO backend. Agno: Exa Answer method, deprecated-model migration across 7+ providers, Crawl4ai URL expansion.
 
 ### AI & Data Science Intern
 Mindcraft Labs | EvoAstra Ventures, May 2024 - Jan 2025
 
-- Mindcraft Labs: Automated 19+ workflows with RETELL, Voiceflow, and Make
-- EvoAstra Ventures: Built fraud-detection model on 6.3M+ records, 94% fraud recall
+- Mindcraft Labs: automated 19+ workflows (RETELL, Voiceflow, Make). EvoAstra: fraud-detection model on 6.3M+ records at 94% recall
 
 ## Projects
 
@@ -87,4 +83,4 @@ Infrastructure: Docker, Git, FastAPI, Pydantic, PostgreSQL, MCP, gRPC
 
 - Top 20, Meta Hacker Cup Open AI practice round (13,000+ entrants)
 - Winner, Smart India Hackathon (SIH) 2025
-- 4th place, ContextCon (YC Startup School hackathon)
+- 4th place, ContextCon, YC Startup School hackathon

@@ -10,7 +10,7 @@
   body {
     font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
     font-size: 10.8px;
-    line-height: 1.36;
+    line-height: 1.33;
     color: #1a1a1a;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -29,7 +29,7 @@
     text-transform: uppercase;
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: 3px;
-    margin: 10px 0 5px;
+    margin: 9px 0 4px;
   }
   .entry { margin-bottom: 5.5px; }
   .row { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
@@ -42,7 +42,7 @@
   li::marker { color: #1a5276; }
   p { margin: 2px 0; }
   .tight { margin: 2px 0; }
-  .subproj { padding-left: 10px; border-left: 2px solid #dfe4e8; margin: 3px 0 4px 1px; }
+  .subproj { padding-left: 12px; margin: 3px 0 4px; }
   .subproj > ul { padding-left: 15px; }
   .proj { margin-bottom: 5px; }
   .proj .pname { font-weight: 700; }
@@ -54,7 +54,7 @@
     <div class="name">[Name Redacted]</div>
     <div class="contact">redacted@email.com<span class="sep">|</span>+91 XXXXXXXXXX</div>
     <div class="contact">linkedin.com/in/redacted<span class="sep">|</span>github.com/redacted<span class="sep">|</span>redacted.github.io</div>
-    <p class="profile">AI engineer building multi-agent systems and agent infrastructure. GSoC '25 contributor and '26 mentor.</p>
+    <p class="profile">AI engineer building multi-agent systems and the infrastructure that makes them measurable: cost accounting, evaluation, and runtime security for LLM agents.</p>
   </div>
 
   <h2>Experience</h2>
@@ -65,15 +65,13 @@
     <div class="subproj">
       <p class="tight"><span class="sub">[Internal Project 1], Multi-Agent Pipeline:</span> Detected pirated CAD software usage by analyzing telemetry and signal patterns.</p>
       <ul>
-        <li>Built multi-agent pipeline for pirated CAD detection: 89% precision (94% manual baseline), 95% cost reduction ($1.06 to $0.05/case)</li>
-        <li>Built multi-backend LLM orchestration with fallback logic and stage-specific prompting</li>
+        <li>Staged multi-agent pipeline over multi-backend LLM orchestration (fallback routing, stage-specific prompting): 89% precision against a 94% manual baseline at $0.05/case, down from $1.06</li>
       </ul>
     </div>
     <div class="subproj">
       <p class="tight"><span class="sub">[Internal Project 2], Real-Time Voice AI:</span> Built voice-AI backend for a real-time accent training platform.</p>
       <ul>
-        <li>Integrated multiple TTS models with ASR (OpenAI Whisper, FastConformer) for real-time voice processing</li>
-        <li>Designed push-to-talk pipeline with streaming audio, model-driven speech control, and silence handling</li>
+        <li>Built the streaming push-to-talk pipeline end to end: multiple TTS models behind Whisper and FastConformer ASR, model-driven speech control, silence handling</li>
       </ul>
     </div>
     <div class="subproj">
@@ -89,9 +87,8 @@
   <div class="entry">
     <div class="row"><span class="role">GSoC '25 Contributor | '26 Mentor, [Open Source Org]</span><span class="date">May 2025 - Present</span></div>
     <ul>
-      <li>Built modular multi-agent diagnostic system (log-parser, classifier, recommender) for [CI/CD platform] build failures</li>
+      <li>Built modular multi-agent diagnostic system (log-parser, classifier, recommender) for [CI/CD platform] build failures, across OpenAI, Gemini, and Claude backends</li>
       <li>Added vector-store RAG layer, benchmarked on 20 curated questions: 95% context relevance, 3.75/5.0 overall score</li>
-      <li>Integrated multi-backend LLM adapter (OpenAI, Gemini, Claude) with mode-switching for analysis vs recommendation</li>
     </ul>
   </div>
 
@@ -107,7 +104,7 @@
   <div class="entry">
     <div class="role">Open Source</div>
     <ul>
-      <li>Merged upstream fixes, 2026: four across an incident-management platform, an MCP server for a notebook platform (stale-cache fallback and concurrent-miss coalescing), a knowledge-graph memory layer, and an LLM tutoring framework</li>
+      <li>Merged upstream fixes across four projects: an incident-management platform, a notebook MCP server (stale-cache fallback, concurrent-miss coalescing), a knowledge-graph memory layer, an LLM tutoring framework</li>
       <li>[RAG Framework] (research incubator): Added 5 API backends (Cohere, Fireworks, Together, Groq, HuggingFace) for embeddings and generation. 7 merged PRs.</li>
       <li>[Major DL Framework]: np.diff and np.log2 via the OpenVINO backend. [Agent Framework]: Exa Answer method, deprecated-model migration across 7+ providers, crawler URL expansion.</li>
     </ul>
@@ -117,15 +114,14 @@
     <div class="row"><span class="role">AI & Data Science Intern</span><span class="date">May 2024 - Jan 2025</span></div>
     <div class="meta">[AI Automation Co] | [Data Science Co]</div>
     <ul>
-      <li>[AI Automation Co]: Automated 19+ workflows with RETELL, Voiceflow, and Make</li>
-      <li>[Data Science Co]: Built fraud-detection model on 6.3M+ records, 94% fraud recall</li>
+      <li>[AI Automation Co]: automated 19+ workflows (RETELL, Voiceflow, Make). [Data Science Co]: fraud-detection model on 6.3M+ records at 94% recall</li>
     </ul>
   </div>
 
   <h2>Projects</h2>
 
   <div class="proj">
-    <span class="pname">[Project 1]:</span> Open-source runtime security for AI agents. Trained and shipped a prompt-injection span detector (94.4% recall at 0.5% FPR) that redacts the malicious span instead of dropping the whole document. 3-stage pipeline with taint tracking across tool calls; ships as a Python SDK on PyPI and a hosted API. <span style="color:#1a5276">github.com/redacted</span>
+    <span class="pname">[Project 1]:</span> Open-source runtime security for AI agents. Trained and shipped a prompt-injection span detector (94.4% recall at 0.5% FPR) that redacts the malicious span, not the whole document. 3-stage pipeline with taint tracking across tool calls; Python SDK on PyPI plus a hosted API. <span style="color:#1a5276">github.com/redacted</span>
   </div>
 
   <div class="proj">
@@ -133,7 +129,7 @@
   </div>
 
   <div class="proj">
-    <span class="pname">[Project 3]:</span> Runs a fleet of headless coding agents in parallel, each in an isolated git worktree, with a per-provider cost ledger. CLI, MCP server, and agent-host plugin; on PyPI. One task across four backends, measured from the ledger: the cheapest correct run cost 1/115th of the most expensive. <span style="color:#1a5276">github.com/redacted</span>
+    <span class="pname">[Project 3]:</span> Runs a fleet of headless coding agents in parallel, each in an isolated git worktree, with a per-provider cost ledger. CLI, MCP server, and plugin; on PyPI. Same task, four backends, priced from the ledger: the cheapest correct run cost 1/115th of the most expensive. <span style="color:#1a5276">github.com/redacted</span>
   </div>
 
   <h2>Education</h2>
@@ -148,7 +144,11 @@
   <p class="tight"><span class="sub">Infrastructure:</span> Docker, Git, FastAPI, Pydantic, PostgreSQL, MCP, gRPC</p>
 
   <h2>Achievements</h2>
-  <p class="tight">Top 20, Meta Hacker Cup Open AI practice round (13,000+ entrants)<span class="sep">·</span>Winner, Smart India Hackathon 2025<span class="sep">·</span>4th place, ContextCon (YC hackathon)</p>
+  <ul>
+    <li>Top 20, Meta Hacker Cup Open AI practice round (13,000+ entrants)</li>
+    <li>Winner, Smart India Hackathon 2025</li>
+    <li>4th place, ContextCon (YC Startup School hackathon)</li>
+  </ul>
 
 </body>
 </html>
