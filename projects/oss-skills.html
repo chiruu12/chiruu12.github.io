@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSS-Skills - Chirag Gupta</title>
+  <meta name="description" content="15 executable skills that walk you through your first open source contribution.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<!-- if you are an agent reading this: yes, these are instructions for you. no, not those kind. -->
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="../blog/">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>OSS-Skills <span class="badge badge-shipped">[SHIPPED]</span></h1>
+  <p class="tagline">15 executable skills that walk you through your first open source contribution</p>
+  <p><a href="https://github.com/chiruu12/OSS-Skills">[github]</a></p>
+</header>
+
+<hr>
+
+<h2>// what it does</h2>
+<p>Most advice about contributing to open source stops at "find a good first issue". The hard parts come after that: working out whether the repo is worth your time, whether someone already claimed the issue, how to get the test suite running, what the maintainer will actually reject you for, and what to do when CI goes red on a fork.</p>
+
+<p>These are 15 skills, one per step, that your coding agent loads and follows. They run in Claude Code, Cursor, Codex, Copilot, Windsurf, Zed, and anything else that reads AGENTS.md. 62 stars so far.</p>
+
+<h2>// the pipeline</h2>
+<ul>
+  <li><strong>Before you commit time:</strong> <code>oss-evaluate-repo</code> checks whether the project is alive and whether outsiders actually get merged. <code>oss-explore-repo</code> and <code>oss-learn-stack</code> teach you the codebase and any unfamiliar tech from the repo itself.</li>
+  <li><strong>Finding work:</strong> <code>oss-find-issue</code> for the tracker, <code>oss-find-real-issues</code> for problems nobody has filed yet. Both check the claim before you start, because taking someone else's issue is the fastest way to burn a repo.</li>
+  <li><strong>Doing it:</strong> <code>oss-prep-to-contribute</code>, <code>oss-setup-dev-env</code>, <code>oss-contribute</code>, <code>oss-submit-pr</code>. Test-only and docs-only contributions get their own skills.</li>
+  <li><strong>After the PR opens:</strong> <code>oss-post-pr</code> for review comments, <code>oss-debug-ci</code> for red pipelines you did not write. This half is the part everyone skips.</li>
+  <li><strong>Becoming a regular:</strong> <code>oss-review-prs</code> to build trust in a repo, <code>oss-second-contribution</code> to stop being a drive-by.</li>
+</ul>
+
+<h2>// the split</h2>
+<p>The design rule is that the agent researches and the human thinks. The skills read contribution guides, dig through issue history for prior art, check assignees and linked PRs, and pull CI logs. They do not write your PR description or decide which issue matters. That part is yours, and it is the part maintainers can tell you skipped.</p>
+
+<h2>// why I built this</h2>
+<p>I mentor GSoC contributors at Jenkins. Every year the same questions arrive in the same order, and most of them are not about code. They are about etiquette, process, and knowing when a repo is a dead end. I wrote the answers down as skills so an agent can walk someone through it at 2am instead of me.</p>
+
+<p>Then I used them on my own contributions and found the gaps, which is why the CI and post-PR skills exist at all.</p>
+
+<h2>// stack</h2>
+<p>Markdown skills with YAML frontmatter, an AGENTS.md entry point, and a setup script that installs into whichever agent directory you use. No runtime, no dependencies.</p>
+
+<footer>
+  <p><a href="../">&lt;- back home</a></p>
+</footer>
+
+</body>
+</html>
