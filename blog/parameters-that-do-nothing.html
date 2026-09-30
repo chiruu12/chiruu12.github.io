@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parameters that do nothing - Chirag Gupta</title>
+  <meta name="description" content="The bug class with my best hit rate: an argument a function accepts and then ignores.">
+  <meta property="og:title" content="Parameters that do nothing">
+  <meta property="og:description" content="The bug class with my best hit rate: an argument a function accepts and then ignores.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="./">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>Parameters that do nothing</h1>
+  <p class="tagline">September 2026</p>
+</header>
+
+<hr>
+
+<p>My best hit rate on any codebase is on arguments a function accepts and then ignores.</p>
+
+<p>Most of my <a href="https://github.com/getmoto/moto">moto</a> work is this. moto mocks AWS, so every backend has to match a published API surface. The signature gets written from the AWS docs on day one, which means the parameter is there and typed and named correctly. Then the body implements the common path and the parameter never gets read. Nothing fails. The call returns a plausible answer that quietly ignores half of what you asked for.</p>
+
+<h2>// the two shapes</h2>
+
+<p>The first is a filter that filters nothing. <a href="https://github.com/getmoto/moto/pull/10241">GetConnections</a> took a <code>Filter</code> and returned everything. <a href="https://github.com/getmoto/moto/pull/10248">Kafka's list</a> took a cluster name and a cluster type and applied neither. <a href="https://github.com/getmoto/moto/pull/10275">ResourceGroups</a> took <code>Filters</code> on tag sync tasks and ignored them. <a href="https://github.com/getmoto/moto/pull/10273">CodeDeploy</a> took <code>includeOnlyStatuses</code> and listed every deployment regardless.</p>
+
+<p>These are the worst kind to hit in a test suite, because a filter that returns too much usually still contains the thing you were looking for. The assertion passes. You find out when you write a test for the empty case and it comes back with four rows.</p>
+
+<p>The second shape is a response field that is the wrong thing. <a href="https://github.com/getmoto/moto/pull/10276">QuickSight</a> returned a version number where the API returns a version ARN. <a href="https://github.com/getmoto/moto/pull/10237">Kafka</a> echoed your own pagination token back at you as the next token, so a loop over it never terminated. <a href="https://github.com/getmoto/moto/pull/10252">Glue</a> took <code>HidePassword</code> and returned the password.</p>
+
+<p>That last one is the reason I keep looking. A flag whose entire purpose is to not show you something, and it shows you the thing.</p>
+
+<h2>// how to find them</h2>
+
+<p>Open the method. Read the signature. Then search the body for each parameter name. If a name appears once, in the signature, that is the bug. No tooling, no static analysis, nothing clever. It takes about a minute per method and most methods are fine.</p>
+
+<p>The variant worth knowing is the parameter that is read but only stored. It gets written to the object and nothing ever reads it back. Slower to spot because the name does appear in the body, and you have to follow it one hop further to see that the hop ends there.</p>
+
+<p>Error paths are the same idea pointed the other way. <a href="https://github.com/getmoto/moto/pull/10240">S3Control</a> accepted a pagination token that could not possibly be valid and carried on. <a href="https://github.com/getmoto/moto/pull/10286">FSx</a> deleted a file system that did not exist and returned success. The API specifies an exception for both. Nothing raised one. Finding these is reading the published error list for an operation and checking which of them the code can actually produce.</p>
+
+<h2>// why this one works</h2>
+
+<p>It needs no context. I do not have to understand what Glue is for to see that <code>Filter</code> is in the signature and nowhere else. That makes it the one thing I can do productively in a repository on the first afternoon, before I know anything.</p>
+
+<p>It is also unambiguous in review. There is a specification, the code does not match it, and the diff is small. Nobody has to decide whether they agree with my design taste. That matters more than it sounds: the slow PRs are not the hard ones, they are the ones where a maintainer has to form an opinion first.</p>
+
+<footer>
+  <p><a href="./">&lt;- back to blog</a></p>
+</footer>
+
+</body>
+</html>
