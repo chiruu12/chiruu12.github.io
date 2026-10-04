@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A linter for prose - Chirag Gupta</title>
+  <meta name="description" content="Why I run a checker over every PR description before it posts, and what it looks for.">
+  <meta property="og:title" content="A linter for prose">
+  <meta property="og:description" content="Why I run a checker over every PR description before it posts, and what it looks for.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="./">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>A linter for prose</h1>
+  <p class="tagline">October 2026</p>
+</header>
+
+<hr>
+
+<p>Nothing I write for a stranger to read goes out without a checker looking at it first. PR descriptions, issue reports, review replies, commit messages. It runs as a git hook, and when it finds something it refuses the command rather than warning me.</p>
+
+<p>The reason is narrow. Some repositories close contributions that read as machine-generated without reviewing them, and they are right to, because the volume of that stuff arriving at an open source project right now is genuinely unmanageable. A maintainer has about ten seconds of attention for a PR from a name they do not recognise. If the first paragraph pattern-matches to filler, the patch underneath it does not get read. Quality of the diff does not save you, because nobody got that far.</p>
+
+<p>So the gate is not really about writing well. It is about not tripping a filter.</p>
+
+<h2>// what it looks for</h2>
+
+<p>Em dashes, which are the loudest single signal and the easiest to fix. Paragraphs that all open with a bolded label. Openers that announce a sentence instead of just writing it. Connectives nobody has ever typed into a code comment. Words that stand in for a specific claim, the ones meaning sturdy or smooth without ever naming what breaks. The not-just-but construction, in each of the shapes it hides in.</p>
+
+<p>Two of the checks measure the text instead of matching strings, and those are the ones that earn their place.</p>
+
+<p>The first is rhythm. It splits the document into sentences, takes the word count of each, and computes the spread as a fraction of the mean. Under a threshold it complains. Human prose is lumpy. A four-word sentence lands next to a thirty-word one because that is how thinking comes out. Text with an even cadence has usually been smoothed by something, and the fix is to break one sentence up and run two others together. This check cannot be satisfied by swapping a word.</p>
+
+<p>The second is rates without a denominator. Any percentage or multiplier in a sentence that carries no sample size beside it gets flagged. Not because the number is wrong, but because a number nobody can check is a claim I am asking a reader to take on faith, and in a bug report that is the whole argument. State the sample or drop the figure.</p>
+
+<p>There is also an invisible-character pass, which started as hygiene and turned out to matter more than I expected. Zero-width spaces and no-break spaces that come along with a copy-paste break grep, corrupt diffs, and survive into files where someone loses an afternoon to them. Bidirectional override characters are worse, because they can make a line of source display as something other than what it does. Those ones block unconditionally.</p>
+
+<h2>// the check that is not about style</h2>
+
+<p>One rule has nothing to do with how the text reads. It looks for process leaking into the output: a commit message describing how a decision got made, a PR body narrating the iterations behind the change, a doc explaining the development rather than the thing.</p>
+
+<p>A reader wants the result. The journey is for me. A commit message that says what shipped is useful to whoever bisects this in two years, and one that says how I arrived at it is noise in their way. That rule always blocks and has no advisory mode.</p>
+
+<h2>// why a hook and not a habit</h2>
+
+<p>I had all of this written down as a convention before any of it was code, and it did not survive contact with a Friday evening. The rules I follow are the ones something else enforces. Everything else is a document I wrote once and stopped reading.</p>
+
+<p>The design constraint that came out of that: the gate has to be fast and it has to be possible to satisfy. A check that fires on good writing gets switched off within a week, and then it protects nothing. So most rules are advisory and only report, two block. When it does block, the rewrite is the point. Routing around it defeats the exercise, and editing the rule to let my sentence through is the same thing wearing a hat.</p>
+
+<p>It is a package rather than a script, which sounds like over-engineering for a text checker and is the thing that has kept it alive. One class per rule in its own file behind a decorator, and the runner, the CLI and the reporters never learn that a new one exists. Adding a check is adding a file. That is low enough friction that I actually add them when I notice a new tell, instead of noting it and never going back.</p>
+
+<p>This post went through it. The vocabulary rule flagged the two words I had quoted as examples of the vocabulary rule, which is the correct behaviour and still took me a minute to accept.</p>
+
+<footer>
+  <p><a href="./">&lt;- back to blog</a></p>
+</footer>
+
+</body>
+</html>
