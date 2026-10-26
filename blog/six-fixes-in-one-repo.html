@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Six fixes in one repo - Chirag Gupta</title>
+  <meta name="description" content="Six merged into Panel in three weeks, and why the first one cost more than the other five together.">
+  <meta property="og:title" content="Six fixes in one repo">
+  <meta property="og:description" content="Six merged into Panel in three weeks, and why the first one cost more than the other five together.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="./">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>Six fixes in one repo</h1>
+  <p class="tagline">October 2026</p>
+</header>
+
+<hr>
+
+<p>Six pull requests merged into <a href="https://github.com/holoviz/panel">Panel</a> this month, in a codebase I had not opened before October.</p>
+
+<ul class="status-list">
+  <li><a href="https://github.com/holoviz/panel/pull/8790">#8790</a> opened 1 Oct, merged 2 Oct. Negative integers in URL query params parsed as something other than int.</li>
+  <li><a href="https://github.com/holoviz/panel/pull/8792">#8792</a> opened 2 Oct, merged 3 Oct. Parameterized objects inside lists not abbreviated in reprs.</li>
+  <li><a href="https://github.com/holoviz/panel/pull/8812">#8812</a> opened 4 Oct, merged 5 Oct. An unparseable period handed to schedule_task looped instead of raising.</li>
+  <li><a href="https://github.com/holoviz/panel/pull/8821">#8821</a> opened 6 Oct, merged 11 Oct. pn.cache hashing value-type arguments by id() rather than by state.</li>
+  <li><a href="https://github.com/holoviz/panel/pull/8867">#8867</a> opened 15 Oct, merged 16 Oct. Local media files with uppercase extensions not detected.</li>
+  <li><a href="https://github.com/holoviz/panel/pull/8894">#8894</a> opened 20 Oct, merged 22 Oct. LiteralInput string values not serialized as JSON by the json serializer.</li>
+</ul>
+
+<p>The diffs run from nine lines to sixty-four. Four of the six merged the day after they were opened.</p>
+
+<h2>// the first one is the expensive one</h2>
+
+<p>Everything that made the other five fast was paid for by the first. Getting the test suite running. Learning that this project keeps its tests inside the package rather than in a top-level tests directory. Working out which of the maintainers reviews what. Reading enough of the contributing guide to know the commit prefix they want.</p>
+
+<p>None of that is work on the bug. All of it has to happen before the first diff, and none of it has to happen again. By the third PR I was spending the time on the actual problem, which is the only part that was ever interesting.</p>
+
+<p>This is the argument for staying in a repo rather than collecting one merge each from ten of them. I have done the ten-repo version and the numbers look similar from outside, but the second contribution to a project you already know is maybe a fifth of the effort of a first contribution somewhere new.</p>
+
+<h2>// bugs come in families</h2>
+
+<p>Once you have seen how a codebase handles one conversion, you know where to look for the next one. The query param fix was about a string arriving from the URL and being turned into the wrong type. The LiteralInput fix three weeks later was a string going the other way and not being serialized as what it was. Same seam, opposite direction.</p>
+
+<p>The uppercase extension bug is the same shape again. Something in the world does not match the exact form the code expected, and the code treats the mismatch as absence instead of as a variant. Projects have habits, and a habit that produced one bug has usually produced others.</p>
+
+<p>That is why the fourth and fifth fixes took less searching than the second. I was not scanning the whole project any more, I was checking the places where this particular codebase tends to be careless.</p>
+
+<h2>// the slow one</h2>
+
+<p><a href="https://github.com/holoviz/panel/pull/8821">#8821</a> took five days and five rounds of review. The other five carried two review rounds each and merged within a day or two.</p>
+
+<p>It was the one that changed how caching decides whether two arguments are the same. Hashing by identity instead of by value is the kind of thing somebody depends on without knowing it, so a maintainer had to decide whether the new behaviour was right before they could decide whether my patch was correct.</p>
+
+<p>That matches what I keep finding. The slow pull requests are not the hard ones. They are the ones where somebody has to form an opinion first, and the fix being small does nothing to speed that up.</p>
+
+<footer>
+  <p><a href="./">&lt;- back to blog</a></p>
+</footer>
+
+</body>
+</html>
