@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One spec, three commands - Chirag Gupta</title>
+  <meta name="description" content="PEP 639 landed in pdm one command at a time, and each gap was its own bug.">
+  <meta property="og:title" content="One spec, three commands">
+  <meta property="og:description" content="PEP 639 landed in pdm one command at a time, and each gap was its own bug.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../" class="site-name">chirag.gupta</a>
+  <a href="../">[home]</a>
+  <a href="./">[blog]</a>
+  <a href="../achievements.html">[achievements]</a>
+  <a href="../resume.pdf">[resume]</a>
+</nav>
+
+<header class="page-header">
+  <h1>One spec, three commands</h1>
+  <p class="tagline">October 2026</p>
+</header>
+
+<hr>
+
+<p>PEP 639 gave Python packaging a single field for licensing. An SPDX expression in <code>License-Expression</code>, instead of a free-text blob or a pile of classifiers. Core metadata 2.4 carries it.</p>
+
+<p>A packaging tool does not adopt a field like that in one commit. It adopts it wherever somebody noticed, and the rest of the commands keep doing what they did before. Three of my merged <a href="https://github.com/pdm-project/pdm">pdm</a> pull requests this month were the same field missing from a different place. I found the first one by accident, then went looking, filed an issue for each and fixed all three.</p>
+
+<h2>// write back what you read</h2>
+
+<p><a href="https://github.com/pdm-project/pdm/pull/3930">#3930</a>. Re-running <code>pdm init</code> on a project that already declared a license would rewrite it into a different shape. An expression string came back as a table. The fix was to write the license back in the form it was found in, so a string stays a string and a file table stays a file table when the answer has not changed.</p>
+
+<p>There was a second half to it. Merging the new metadata into the old one left you with both keys present, so a project with <code>{file = "LICENSE"}</code> given <code>--license MIT</code> ended up carrying the file and the text at once. Replacing the field whole rather than merging into it is the correct move, because license is one answer and not an accumulation.</p>
+
+<p>Any tool that rewrites a config file someone else hand-wrote has this bug waiting in it somewhere. Reading is lossy, and whatever the reader discarded is what the writer silently changes.</p>
+
+<h2>// the reader lags the writer</h2>
+
+<p><a href="https://github.com/pdm-project/pdm/pull/3949">#3949</a>. <code>pdm show</code> and <code>pdm list --fields licenses</code> did not know <code>License-Expression</code> existed. They read the old <code>License</code> field and fell back to classifiers. So a package published correctly under the new spec displayed as having no license at all, which is the worst possible answer for that particular question.</p>
+
+<p>Adding the new field is only half the work. The fallback has to stay, because most of the index is still old metadata, and a tool that reads only the current spec breaks for everything published before it. After the change the example from the issue report shows real values for idna, packaging and urllib3, including the one with an <code>OR</code> in it that no classifier could ever have expressed.</p>
+
+<h2>// match the ecosystem, not the spec</h2>
+
+<p><a href="https://github.com/pdm-project/pdm/pull/3953">#3953</a> was the interesting one. <code>pdm publish</code> was not sending the licensing fields to the index at all, so a correctly built wheel arrived with an empty license.</p>
+
+<p>Sending them is easy. The part worth knowing is that <code>license_file</code> has to be skipped below Metadata-Version 2.4, because setuptools writes <code>License-File</code> under 2.1 where the spec does not define it, and twine drops it there. Following the specification alone would have produced an upload that disagrees with what every other tool sends.</p>
+
+<p>That is the general shape of packaging work. The document tells you what is correct and the installed base tells you what is accepted, and when they disagree you match the installed base and leave a comment saying why.</p>
+
+<h2>// why these are good contributions</h2>
+
+<p>Nobody has to agree with me about anything here. There is a published spec and a command that does not follow it, so the design argument is finished before I open the editor. Writing the issue first is part of that. It forces me to state the expected behaviour in plain terms and gives a maintainer somewhere to say no before I have written anything.</p>
+
+<p>The work is in the tests. Each of these needed cases that fail on main and cases that pass on main, the second kind there to prove the old behaviour survived. That is most of the diff and all of the reason it merged quickly.</p>
+
+<footer>
+  <p><a href="./">&lt;- back to blog</a></p>
+</footer>
+
+</body>
+</html>
